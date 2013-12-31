@@ -1,7 +1,9 @@
 task :symlink do
   ext = '.symlink'
   Dir.glob("*#{ext}") do |path|
-    File.symlink("#{Dir.pwd}/#{path}", "../.#{File.basename(path, ext)}")
+    dotfile = "#{Dir.pwd}/#{path}"
+    symlink = "../.#{File.basename(path, ext)}"
+    FileUtils.ln_s dotfile, symlink, :force => true, :verbose => true
   end
 end
 
