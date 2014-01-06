@@ -73,3 +73,7 @@ export RPROMPT="\$(rbenv_prompt_info)"
 
 # Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+# aliases
+[[ -f ~/.aliases ]] && source ~/.aliases
+

@@ -15,11 +15,14 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-haml'
 Bundle 'kien/ctrlp.vim'
-Bundle 'mileszs/ack.vim'
-Bundle 'scrooloose/nerdcommenter'
+Bundle 'rking/ag.vim'
+Bundle 'tComment'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'SirVer/ultisnips'
 Bundle 'mhinz/vim-signify'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'bling/vim-airline'
+Bundle 'kchmck/vim-coffee-script'
 
 filetype plugin indent on     " required!
 "
@@ -175,6 +178,8 @@ set expandtab
 "set shiftwidth=2
 "set tabstop=2
 
+" show training whitespace
+set list listchars=tab:\|_,trail:·
 
 "------------------------------------------------------------
 " Mappings {{{1
@@ -189,7 +194,7 @@ map Y y$
 " next search
 nnoremap <C-L> :nohl<CR><C-L>
 
-
+nmap <D-F> :Ack<space>
 "------------------------------------------------------------
 
 let g:airline_powerline_fonts = 1
