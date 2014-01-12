@@ -195,6 +195,12 @@ map Y y$
 nnoremap <C-L> :nohl<CR><C-L>
 
 nmap <D-F> :Ack<space>
+
+let mapleader = ","
+
+" Open markdown files in Marked with <leader>p
+au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} nnoremap <leader>p :silent !open -a Marked.app '%:p'<cr>
+
 "------------------------------------------------------------
 
 let g:airline_powerline_fonts = 1
