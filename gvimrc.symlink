@@ -1,1 +1,10 @@
+" https://gist.github.com/baopham/1838072
 set guifont=Monaco\ for\ Powerline:h14
+let g:solarized_termtrans=1
+let g:solarized_termcolors=256
+let g:solarized_contrast="high"
+let g:solarized_visibility="high"
+
+if has("gui_running")
+  set guioptions=-t " no top toolbar
+endif
