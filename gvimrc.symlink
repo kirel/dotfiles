@@ -5,6 +5,11 @@ let g:solarized_termcolors=256
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 
+" CtrlP OS-X Menu remapping
+if has("gui_macvim")
+  macmenu &File.New\ Tab key=<D-S-t>
+endif
+
 if has("gui_running")
   set guioptions=-t " no top toolbar
 endif
