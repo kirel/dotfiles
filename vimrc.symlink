@@ -14,6 +14,8 @@ Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-markdown'
+Bundle 'jtratner/vim-flavored-markdown'
 Bundle 'kien/ctrlp.vim'
 Bundle 'rking/ag.vim'
 Bundle 'tComment'
@@ -196,15 +198,39 @@ nnoremap <C-L> :nohl<CR><C-L>
 
 nmap <D-F> :Ack<space>
 
+" kill whitespace?
+:nnoremap <silent> <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+
 let mapleader = ","
 
 " Open markdown files in Marked with <leader>p
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} nnoremap <leader>p :silent !open -a Marked.app '%:p'<cr>
 
 "------------------------------------------------------------
+set shell=/bin/sh
+set tags=./tags,tags
 
 let g:airline_powerline_fonts = 1
+let g:airline_theme='solarized'
+
+let g:syntastic_auto_loc_list=1
+let g:syntastic_enable_balloons = 1
+let g:syntastic_check_on_open=0
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+
+let g:Tex_DefaultTargetFormat= 'pdf'
+let g:Tex_ViewRule_pdf = 'Skim'
+let g:Tex_CompileRule_pdf = 'xelatex -interaction=nonstopmode $*'
 
 syntax enable
 set background=dark
 colorscheme solarized
+
+set wildignore+=*.o,*.obj,*.sassc,.git,*/public/magento*,*/public/assets/source_maps*,*/tmp/*,coverage
+
+" vim-flavored-markdown
+augroup markdown
+    au!
+    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+augroup END
