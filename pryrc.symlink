@@ -13,6 +13,19 @@ if defined?(Rails) && Rails.env
     require "console_app"
     require "console_with_helpers"
   end
+  
+  def loud_logger
+    set_logger_to Logger.new(STDOUT)
+  end
+
+  def quiet_logger
+    set_logger_to nil
+  end
+
+  def set_logger_to(logger)
+    ActiveRecord::Base.logger = logger
+    ActiveRecord::Base.clear_active_connections!
+  end
 end
 
 begin
