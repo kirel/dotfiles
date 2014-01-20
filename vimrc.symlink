@@ -196,7 +196,7 @@ map Y y$
 " next search
 nnoremap <C-L> :nohl<CR><C-L>
 
-nmap <D-F> :Ack<space>
+nmap <D-F> :Ag<space>
 
 " kill whitespace?
 :nnoremap <silent> <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
@@ -209,6 +209,8 @@ au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} nnoremap <leader>p :silent 
 "------------------------------------------------------------
 set shell=/bin/sh
 set tags=./tags,tags
+
+let g:ctrlp_map='<D-t>'
 
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'

@@ -50,9 +50,8 @@ plugins=(rails git rbenv)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin" # ?
+# local config
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
