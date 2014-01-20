@@ -1,2 +1,6 @@
 alias vim='mvim -v'
 alias mou='open -a Mou'
+
+# Git
+alias gprd='git pull-request -b development | xargs open'
+alias gprm='git pull-request -b master | xargs open'
