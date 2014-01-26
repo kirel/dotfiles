@@ -12,6 +12,8 @@ Bundle 'gmarik/vundle'
 "
 " original repos on GitHub
 Bundle 'tpope/vim-fugitive'
+Bundle 'mattn/webapi-vim'
+Bundle 'mattn/gist-vim'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
@@ -224,6 +226,9 @@ let g:syntastic_warning_symbol='⚠'
 let g:Tex_DefaultTargetFormat= 'pdf'
 let g:Tex_ViewRule_pdf = 'Skim'
 let g:Tex_CompileRule_pdf = 'xelatex -interaction=nonstopmode $*'
+
+let g:gist_clip_command = 'pbcopy'
+let g:gist_open_browser_after_post = 1
 
 syntax enable
 set background=dark
