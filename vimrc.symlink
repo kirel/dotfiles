@@ -12,9 +12,13 @@ Bundle 'gmarik/vundle'
 "
 " original repos on GitHub
 Bundle 'tpope/vim-fugitive'
+Bundle 'mattn/webapi-vim'
+Bundle 'mattn/gist-vim'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-dispatch'
+Bundle 'thoughtbot/vim-rspec'
 Bundle 'jtratner/vim-flavored-markdown'
 Bundle 'kien/ctrlp.vim'
 Bundle 'rking/ag.vim'
@@ -228,6 +232,16 @@ let g:Tex_CompileRule_pdf = 'xelatex -interaction=nonstopmode $*'
 
 let g:ackprg = 'ag --nogroup --nocolor --column' " in case of ack.vim
 let g:agprg = 'ag --nogroup --nocolor --column'
+
+let g:gist_clip_command = 'pbcopy'
+let g:gist_open_browser_after_post = 1
+
+" RSpec.vim mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+let g:rspec_command = "Dispatch rspec {spec}"
 
 syntax enable
 set background=dark

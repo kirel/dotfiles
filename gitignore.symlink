@@ -2,4 +2,5 @@
 .svn
 .sass-cache
 *~
-*.swp
+*.sw[nop]
+tags
