@@ -106,6 +106,7 @@ set showcmd
 
 " Highlight searches (use <C-L> to temporarily turn off highlighting; see the
 " mapping of <C-L> below)
+set incsearch
 set hlsearch
 
 " Modelines have historically been a source of security vulnerabilities. As
@@ -234,6 +235,9 @@ let g:syntastic_warning_symbol='⚠'
 let g:Tex_DefaultTargetFormat= 'pdf'
 let g:Tex_ViewRule_pdf = 'Skim'
 let g:Tex_CompileRule_pdf = 'xelatex -interaction=nonstopmode $*'
+
+let g:ackprg = 'ag --nogroup --nocolor --column' " in case of ack.vim
+let g:agprg = 'ag --nogroup --nocolor --column'
 
 let g:gist_clip_command = 'pbcopy'
 let g:gist_open_browser_after_post = 1
