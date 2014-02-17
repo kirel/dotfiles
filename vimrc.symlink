@@ -30,6 +30,8 @@ Bundle 'mhinz/vim-signify'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'bling/vim-airline'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'rizzatti/funcoo.vim'
+Bundle 'rizzatti/dash.vim'
 
 filetype plugin indent on     " required!
 "
@@ -248,6 +250,9 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 let g:rspec_command = "Dispatch rspec {spec}"
+
+" Dash
+:nmap <silent> <leader>d <Plug>DashSearch
 
 syntax enable
 set background=dark
