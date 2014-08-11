@@ -43,7 +43,7 @@ alias prosta='git compare `production`...`staging`'
 alias stapro='git compare `staging`...`production`'
 
 # aliases
-[[ -f ~/.aliases ]] && source ~/.aliases
+[[ -a ~/.aliases ]] && source ~/.aliases
 
 # local config
 [[ -f ~/.profile.local ]] && source ~/.profile.local
