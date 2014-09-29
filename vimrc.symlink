@@ -228,6 +228,7 @@ set shell=/bin/sh
 set tags=./tags,tags
 
 let g:ctrlp_map='<D-t>'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|bower_components|target|dist)|(\.(swp|ico|git|svn))$'
 
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
