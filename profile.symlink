@@ -18,8 +18,10 @@ export CABAL_BIN=~/.cabal/bin
 export TEX_BIN="/usr/texbin"
 # Heroku Toolbelt
 export HEROKU_BIN="/usr/local/heroku/bin"
+# Anaconda
+export CONDA_BIN="/Users/danielkirsch/anaconda/bin"
 # path
-export PATH=$NODE_BIN:$HASKELL_BIN:$CABAL_BIN:$TEX_BIN:$HEROKU_BIN:$PATH
+export PATH=$CONDA_BIN:$NODE_BIN:$HASKELL_BIN:$CABAL_BIN:$TEX_BIN:$HEROKU_BIN:$PATH
 # fix jslint
 export JS_CMD=`which node`
 # ruby performance
