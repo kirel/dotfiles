@@ -39,6 +39,7 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'rizzatti/funcoo.vim'
 Plugin 'rizzatti/dash.vim'
 Plugin 'derekwyatt/vim-scala'
+Plugin 'junegunn/vim-easy-align'
 Plugin 'pry'
 
 " All of your Plugins must be added before the following line
