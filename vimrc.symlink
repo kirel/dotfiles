@@ -42,6 +42,7 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'pry'
 Plugin 'mitsuhiko/vim-jinja'
+Plugin 'elixir-lang/vim-elixir'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
