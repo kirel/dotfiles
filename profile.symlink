@@ -16,10 +16,8 @@ export CABAL_BIN=~/.cabal/bin
 export TEX_BIN="/usr/texbin"
 # Heroku Toolbelt
 export HEROKU_BIN="/usr/local/heroku/bin"
-# Anaconda
-export CONDA_BIN="/Users/danielkirsch/anaconda/bin"
 # path
-export PATH=$CONDA_BIN:$NODE_BIN:$HASKELL_BIN:$CABAL_BIN:$TEX_BIN:$HEROKU_BIN:$PATH
+export PATH=$NODE_BIN:$HASKELL_BIN:$CABAL_BIN:$TEX_BIN:$HEROKU_BIN:$PATH
 # fix jslint
 export JS_CMD=`which node`
 # ruby performance
@@ -31,10 +29,34 @@ export RUBY_GC_MALLOC_LIMIT=100000000
 
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
+# Python
+# virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2.7
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+export PIP_VIRTUALENV_BASE=$WORKON_HOME
+export PIP_RESPECT_VIRTUALENV=true
+export PIP_REQUIRE_VIRTUALENV=true
+
+[[ -f  /usr/local/bin/virtualenvwrapper.sh ]] && source /usr/local/bin/virtualenvwrapper.sh
+
+gpip(){
+   PIP_REQUIRE_VIRTUALENV="" pip "$@"
+}
+
+# Anaconda
+export CONDA_BIN="/Users/danielkirsch/anaconda/bin"
+# path
+alias anaconda="export PATH=$CONDA_BIN:$PATH"
+
 # rbenv
 export RBENV_ROOT=/usr/local/var/rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export RPROMPT="\$(rbenv_prompt_info)"
+
+# nvm
+export NVM_DIR="/Users/danielkirsch/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # git stuff
 function git() { hub "$@"; }
