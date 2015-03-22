@@ -46,6 +46,7 @@ gpip(){
 
 # Anaconda
 export CONDA_BIN="/Users/danielkirsch/anaconda/bin"
+export DYLD_FALLBACK_LIBRARY_PATH="/Users/danielkirsch/anaconda/lib"
 # path
 alias anaconda="export PATH=$CONDA_BIN:$PATH"
 
