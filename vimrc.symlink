@@ -6,7 +6,7 @@ call vundle#begin()
 
 " let Vundle manage Vundle
 " required!
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 " My bundles here:
 "
@@ -43,6 +43,7 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'pry'
 Plugin 'mitsuhiko/vim-jinja'
 Plugin 'elixir-lang/vim-elixir'
+Plugin 'zerowidth/vim-copy-as-rtf'
 
 " Clojure
 Plugin 'guns/vim-clojure-static'
