@@ -44,6 +44,10 @@ Plugin 'pry'
 Plugin 'mitsuhiko/vim-jinja'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'zerowidth/vim-copy-as-rtf'
+Plugin 'munshkr/vim-tidal'
+Plugin 'jpalardy/vim-slime'
+Plugin 'bitc/vim-hdevtools'
+Plugin 'eagletmt/ghcmod-vim'
 
 " Clojure
 Plugin 'guns/vim-clojure-static'
@@ -377,3 +381,11 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+" slime
+let g:slime_target = "tmux"
+let g:slime_paste_file = tempname()
+
+" Haskell
+au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
+au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
