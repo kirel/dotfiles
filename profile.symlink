@@ -75,4 +75,4 @@ alias stapro='git compare `staging`...`production`'
 [[ -a ~/.aliases ]] && source ~/.aliases
 
 # local config
-[[ -f ~/.profile.local ]] && source ~/.profile.local
+[[ -a ~/.profile.local ]] && source ~/.profile.local
