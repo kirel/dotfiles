@@ -30,6 +30,8 @@ export RUBY_GC_MALLOC_LIMIT=100000000
 
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
 # Python
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
@@ -38,6 +40,7 @@ export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 export PIP_REQUIRE_VIRTUALENV=true
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 [[ -f  /usr/local/bin/virtualenvwrapper.sh ]] && source /usr/local/bin/virtualenvwrapper.sh
 
@@ -45,16 +48,29 @@ gpip(){
    PIP_REQUIRE_VIRTUALENV="" pip "$@"
 }
 
+gpip3(){
+   PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
+}
+
+# http://matplotlib.org/faq/virtualenv_faq.html
+function frameworkpython {
+    if [[ ! -z "$VIRTUAL_ENV" ]]; then
+        PYTHONHOME=$VIRTUAL_ENV /usr/local/bin/python "$@"
+    else
+        /usr/local/bin/python "$@"
+    fi
+}
+
 # Anaconda
-export CONDA_BIN="/Users/danielkirsch/anaconda/bin"
-export DYLD_FALLBACK_LIBRARY_PATH="/Users/danielkirsch/anaconda/lib"
+export CONDA_BIN="/Users/danielkirsch/anaconda3/bin"
+# export DYLD_FALLBACK_LIBRARY_PATH="/Users/danielkirsch/anaconda3/lib"
 # path
-alias anaconda="export PATH=$CONDA_BIN:$PATH"
+alias ana="echo \"Activating anaconda\" && export PATH=$CONDA_BIN:$PATH"
 
 # rbenv
 export RBENV_ROOT=/usr/local/var/rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-export RPROMPT="\$(rbenv_prompt_info)"
+export RPROMPT="\$(virtualenv_prompt_info) \$(rbenv_prompt_info)"
 
 # nvm
 export NVM_DIR="/Users/danielkirsch/.nvm"
