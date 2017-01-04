@@ -13,8 +13,14 @@ Plugin 'gmarik/Vundle.vim'
 " original repos on GitHub
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sleuth'
+" Plugin 'xolox/vim-misc'
+" Plugin 'xolox/vim-easytags'
 Plugin 'mattn/webapi-vim'
 Plugin 'mattn/gist-vim'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-projectionist'
+Plugin 'tpope/vim-rake'
+Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-surround'
@@ -24,7 +30,7 @@ Plugin 'hail2u/vim-css3-syntax'
 Plugin 'groenewege/vim-less'
 Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-dispatch'
-Plugin 'thoughtbot/vim-rspec'
+" Plugin 'thoughtbot/vim-rspec'
 Plugin 'jtratner/vim-flavored-markdown'
 Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
@@ -34,20 +40,22 @@ Plugin 'jcf/vim-latex'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'mhinz/vim-signify'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'rizzatti/funcoo.vim'
 Plugin 'rizzatti/dash.vim'
-Plugin 'derekwyatt/vim-scala'
+" Plugin 'derekwyatt/vim-scala'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'pry'
 Plugin 'mitsuhiko/vim-jinja'
-Plugin 'elixir-lang/vim-elixir'
+" Plugin 'elixir-lang/vim-elixir'
 Plugin 'zerowidth/vim-copy-as-rtf'
-Plugin 'munshkr/vim-tidal'
 Plugin 'jpalardy/vim-slime'
-Plugin 'bitc/vim-hdevtools'
+Plugin 'eagletmt/neco-ghc'
 Plugin 'eagletmt/ghcmod-vim'
+Plugin 'hynek/vim-python-pep8-indent'
+Plugin 'jmcantrell/vim-virtualenv'
 
 " Clojure
 Plugin 'guns/vim-clojure-static'
@@ -264,8 +272,8 @@ let g:Tex_DefaultTargetFormat= 'pdf'
 let g:Tex_ViewRule_pdf = 'Skim'
 let g:Tex_CompileRule_pdf = 'xelatex -interaction=nonstopmode $*'
 
-let g:ackprg = 'ag --nogroup --nocolor --column' " in case of ack.vim
-let g:agprg = 'ag --nogroup --nocolor --column'
+let g:ack_prg = 'ag --nogroup --nocolor --column' " in case of ack.vim
+let g:ag_prg = 'ag --nogroup --nocolor --column'
 
 let g:gist_clip_command = 'pbcopy'
 let g:gist_open_browser_after_post = 1
@@ -389,3 +397,5 @@ let g:slime_paste_file = tempname()
 " Haskell
 au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
 au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsClear<CR>
+
+ab ip import ipdb; ipdb.set_trace()
