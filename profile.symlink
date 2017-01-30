@@ -67,10 +67,15 @@ export CONDA_BIN="/Users/danielkirsch/anaconda3/bin"
 # path
 alias ana="echo \"Activating anaconda\" && export PATH=$CONDA_BIN:$PATH"
 
+# Pyenv
+export PYENV_ROOT=/usr/local/var/pyenv
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+
 # rbenv
 export RBENV_ROOT=/usr/local/var/rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-export RPROMPT="\$(virtualenv_prompt_info) \$(rbenv_prompt_info)"
+
+export RPROMPT="\$(virtualenv_prompt_info) \$(pyenv_prompt_info) \$(rbenv_prompt_info)"
 
 # nvm
 export NVM_DIR="/Users/danielkirsch/.nvm"
