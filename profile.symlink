@@ -78,6 +78,9 @@ export NVM_DIR="/Users/danielkirsch/.nvm"
 # git stuff
 function git() { hub "$@"; }
 
+# z
+[[ -a /usr/local/etc/profile.d/z.sh ]] && source /usr/local/etc/profile.d/z.sh
+
 # aliases
 [[ -a ~/.aliases ]] && source ~/.aliases
 
