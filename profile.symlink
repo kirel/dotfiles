@@ -32,17 +32,11 @@ export ANDROID_HOME=/usr/local/opt/android-sdk
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
-# Python
-# virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2.7
-export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
-export PIP_VIRTUALENV_BASE=$WORKON_HOME
+# Python virtualenv/pipenv
 export PIP_RESPECT_VIRTUALENV=true
 export PIP_REQUIRE_VIRTUALENV=true
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-
-[[ -f  /usr/local/bin/virtualenvwrapper.sh ]] && source /usr/local/bin/virtualenvwrapper.sh
+export PIPENV_VENV_IN_PROJECT=1
 
 gpip(){
    PIP_REQUIRE_VIRTUALENV="" pip "$@"
