@@ -77,14 +77,6 @@ export NVM_DIR="/Users/danielkirsch/.nvm"
 
 # git stuff
 function git() { hub "$@"; }
-alias production='git tag | grep production | tail -n1'
-alias staging='git tag | grep staging | tail -n1'
-alias promas='git compare `production`...master'
-alias prodev='git compare `production`...development'
-alias stadev='git compare `staging`...development'
-alias stamas='git compare `staging`...master'
-alias prosta='git compare `production`...`staging`'
-alias stapro='git compare `staging`...`production`'
 
 # aliases
 [[ -a ~/.aliases ]] && source ~/.aliases
