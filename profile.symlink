@@ -14,11 +14,13 @@ export HASKELL_BIN="$HOME/Library/Haskell/bin"
 export STACK_BIN="$HOME/.local/bin"
 export CABAL_BIN=~/.cabal/bin
 # latex
-export TEX_BIN="/usr/texbin"
+export TEX_BIN="/Library/TeX/texbin"
 # Heroku Toolbelt
 export HEROKU_BIN="/usr/local/heroku/bin"
+# php
+export COMPOSER_BIN="~/.composer/vendor/bin"
 # path
-export PATH=$NODE_BIN:$STACK_BIN:$CABAL_BIN:$HASKELL_BIN:$TEX_BIN:$HEROKU_BIN:$PATH
+export PATH=$NODE_BIN:$STACK_BIN:$CABAL_BIN:$HASKELL_BIN:$TEX_BIN:$HEROKU_BIN:$COMPOSER_BIN:$PATH
 # fix jslint
 export JS_CMD=`which node`
 # ruby performance
@@ -69,7 +71,12 @@ alias ana="echo \"Activating anaconda\" && export PATH=$CONDA_BIN:$PATH"
 
 # Pyenv
 export PYENV_ROOT=/usr/local/var/pyenv
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+if which pyenv > /dev/null;
+  then eval "$(pyenv init -)";
+  function pyenv_prompt_info() {
+      echo "$(pyenv version-name)"
+  }
+fi
 
 # rbenv
 export RBENV_ROOT=/usr/local/var/rbenv
@@ -97,3 +104,5 @@ alias stapro='git compare `staging`...`production`'
 
 # local config
 [[ -a ~/.profile.local ]] && source ~/.profile.local
+
+[[ /usr/local/etc/profile.d/z.sh ]] && . /usr/local/etc/profile.d/z.sh
