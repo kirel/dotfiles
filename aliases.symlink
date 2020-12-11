@@ -1,8 +1,15 @@
-alias mou='open -a Mou'
-
 # Git
 alias gprd='git pull-request -b development | xargs open'
 alias gprm='git pull-request -b master | xargs open'
 
 alias vansible='ansible all -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory --private-key=~/.vagrant.d/insecure_private_key -u vagrant'
 alias vansible-playbook='ansible-playbook -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory --private-key=~/.vagrant.d/insecure_private_key -u vagrant'
+
+alias grmm='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
+alias cat="bat --theme=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo default || echo GitHub)"
+
+alias ping='prettyping --nolegend'
+alias top="sudo htop"
+alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+
+alias sidetone='sox --buffer 512 -v 3 -d -d'

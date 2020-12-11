@@ -41,7 +41,7 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2.7
 export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
-export PIP_REQUIRE_VIRTUALENV=true
+#export PIP_REQUIRE_VIRTUALENV=true
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 [[ -f  /usr/local/bin/virtualenvwrapper.sh ]] && source /usr/local/bin/virtualenvwrapper.sh
@@ -99,10 +99,17 @@ alias stamas='git compare `staging`...master'
 alias prosta='git compare `production`...`staging`'
 alias stapro='git compare `staging`...`production`'
 
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # aliases
 [[ -a ~/.aliases ]] && source ~/.aliases
+[[ -a ~/.aliases.local ]] && source ~/.aliases.local
 
 # local config
 [[ -a ~/.profile.local ]] && source ~/.profile.local
 
 [[ /usr/local/etc/profile.d/z.sh ]] && . /usr/local/etc/profile.d/z.sh
+
+[[ -a ~/.billie.sh ]] && source ~/.billie.sh
+[[ -a ~/code/ds-aws/aws.sh ]] && source ~/code/ds-aws/aws.sh
