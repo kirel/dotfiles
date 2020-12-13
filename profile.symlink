@@ -90,26 +90,18 @@ export NVM_DIR="/Users/danielkirsch/.nvm"
 
 # git stuff
 function git() { hub "$@"; }
-alias production='git tag | grep production | tail -n1'
-alias staging='git tag | grep staging | tail -n1'
-alias promas='git compare `production`...master'
-alias prodev='git compare `production`...development'
-alias stadev='git compare `staging`...development'
-alias stamas='git compare `staging`...master'
-alias prosta='git compare `production`...`staging`'
-alias stapro='git compare `staging`...`production`'
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # aliases
 [[ -a ~/.aliases ]] && source ~/.aliases
-[[ -a ~/.aliases.local ]] && source ~/.aliases.local
-
-# local config
-[[ -a ~/.profile.local ]] && source ~/.profile.local
 
 [[ /usr/local/etc/profile.d/z.sh ]] && . /usr/local/etc/profile.d/z.sh
 
+# secrets
+[[ -a ~/.secrets.sh ]] && source ~/.secrets.sh
+
+# Billie
 [[ -a ~/.billie.sh ]] && source ~/.billie.sh
 [[ -a ~/code/ds-aws/aws.sh ]] && source ~/code/ds-aws/aws.sh
