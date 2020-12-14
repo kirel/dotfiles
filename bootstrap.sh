@@ -8,7 +8,8 @@ brew install --cask \
 # my secrets
 eval $(op signin my)
 op get document .secrets.sh > ~/.secrets.sh # op edit document .secrets.sh ~/.secrets.sh
-# TODO ssh key
+op get document id_rsa_private.pub > ~/.ssh/id_rsa_private.pub # op edit document id_rsa_private.pub ~/.ssh/id_rsa_private.pub
+op get document id_rsa_private > ~/.ssh/id_rsa_private # op edit document id_rsa_private ~/.ssh/id_rsa_private
 
 # Billie 1password account
 eval $(op signin billie_team)
