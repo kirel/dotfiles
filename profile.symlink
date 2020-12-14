@@ -14,11 +14,13 @@ export HASKELL_BIN="$HOME/Library/Haskell/bin"
 export STACK_BIN="$HOME/.local/bin"
 export CABAL_BIN=~/.cabal/bin
 # latex
-export TEX_BIN="/usr/texbin"
+export TEX_BIN="/Library/TeX/texbin"
 # Heroku Toolbelt
 export HEROKU_BIN="/usr/local/heroku/bin"
+# php
+export COMPOSER_BIN="~/.composer/vendor/bin"
 # path
-export PATH=$NODE_BIN:$STACK_BIN:$CABAL_BIN:$HASKELL_BIN:$TEX_BIN:$HEROKU_BIN:$PATH
+export PATH=$NODE_BIN:$STACK_BIN:$CABAL_BIN:$HASKELL_BIN:$TEX_BIN:$HEROKU_BIN:$COMPOSER_BIN:$PATH
 # fix jslint
 export JS_CMD=`which node`
 # ruby performance
@@ -34,7 +36,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # Python virtualenv/pipenv
 export PIP_RESPECT_VIRTUALENV=true
-export PIP_REQUIRE_VIRTUALENV=true
+#export PIP_REQUIRE_VIRTUALENV=true
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export PIPENV_VENV_IN_PROJECT=1
 
@@ -61,9 +63,14 @@ export CONDA_BIN="/Users/danielkirsch/anaconda3/bin"
 # path
 alias ana="echo \"Activating anaconda\" && export PATH=$CONDA_BIN:$PATH"
 
-# Pyenv # via oh-my-zsh plugin
-# export PYENV_ROOT=/usr/local/var/pyenv
-# if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+# Pyenv
+export PYENV_ROOT=/usr/local/var/pyenv
+if which pyenv > /dev/null;
+  then eval "$(pyenv init -)";
+  function pyenv_prompt_info() {
+      echo "$(pyenv version-name)"
+  }
+fi
 
 # rbenv # via oh-my-zsh plugin
 # export RBENV_ROOT=/usr/local/var/rbenv
@@ -78,11 +85,17 @@ export NVM_DIR="/Users/danielkirsch/.nvm"
 # git stuff
 function git() { hub "$@"; }
 
-# z
-[[ -a /usr/local/etc/profile.d/z.sh ]] && source /usr/local/etc/profile.d/z.sh
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # aliases
 [[ -a ~/.aliases ]] && source ~/.aliases
 
-# local config
-[[ -a ~/.profile.local ]] && source ~/.profile.local
+[[ /usr/local/etc/profile.d/z.sh ]] && . /usr/local/etc/profile.d/z.sh
+
+# secrets
+[[ -a ~/.secrets.sh ]] && source ~/.secrets.sh
+
+# Billie
+[[ -a ~/.billie.sh ]] && source ~/.billie.sh
+[[ -a ~/code/ds-aws/aws.sh ]] && source ~/code/ds-aws/aws.sh

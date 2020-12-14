@@ -47,7 +47,7 @@ DEFAULT_USER="danielkirsch"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(brew cabal git rbenv virtualenv docker)
+plugins=(git autoenv)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -60,3 +60,5 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   export EDITOR='mvim'
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

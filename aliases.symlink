@@ -1,5 +1,3 @@
-alias mou='open -a Mou'
-
 # Git
 alias gprd='git pull-request -b development | xargs open'
 alias gprm='git pull-request -b master | xargs open'
@@ -7,10 +5,11 @@ alias gprm='git pull-request -b master | xargs open'
 alias vansible='ansible all -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory --private-key=~/.vagrant.d/insecure_private_key -u vagrant'
 alias vansible-playbook='ansible-playbook -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory --private-key=~/.vagrant.d/insecure_private_key -u vagrant'
 
-alias idabox='ssh idabox -t -- "tmux attach || tmux new"'
-alias idaboxup='source ~/.aws_ida && aws ec2 start-instances --instance-ids  i-04a9a634d6017352c'
-alias idaboxdown='source ~/.aws_ida && aws ec2 stop-instances --instance-ids  i-04a9a634d6017352c'
-alias idaboxdown='source ~/.aws_ida && aws ec2 stop-instances --instance-ids  i-04a9a634d6017352c'
-alias idabox1x='source ~/.aws_ida && aws ec2 modify-instance-attribute --instance-id i-04a9a634d6017352c --instance-type "{\"Value\": \"m4.large\"}"'
-alias idabox4x='source ~/.aws_ida && aws ec2 modify-instance-attribute --instance-id i-04a9a634d6017352c --instance-type "{\"Value\": \"m4.4xlarge\"}"'
-alias idabox10x='source ~/.aws_ida && aws ec2 modify-instance-attribute --instance-id i-04a9a634d6017352c --instance-type "{\"Value\": \"m4.10xlarge\"}"'
+alias grmm='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
+alias cat="bat --theme=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo default || echo GitHub)"
+
+alias ping='prettyping --nolegend'
+alias top="sudo htop"
+alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+
+alias sidetone='sox --buffer 512 -v 3 -d -d'
