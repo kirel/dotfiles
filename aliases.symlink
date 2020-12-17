@@ -1,7 +1,4 @@
 # Git
-alias gprd='git pull-request -b development | xargs open'
-alias gprm='git pull-request -b master | xargs open'
-
 alias vansible='ansible all -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory --private-key=~/.vagrant.d/insecure_private_key -u vagrant'
 alias vansible-playbook='ansible-playbook -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory --private-key=~/.vagrant.d/insecure_private_key -u vagrant'
 
