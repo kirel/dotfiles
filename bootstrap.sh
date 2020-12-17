@@ -21,6 +21,8 @@ if [[ ! -z "${EMAIL}" ]]; then
     op get document .secrets.sh > ~/.secrets.sh # op edit document .secrets.sh ~/.secrets.sh
     op get document id_rsa_private.pub > ~/.ssh/id_rsa.pub # op edit document id_rsa_private.pub ~/.ssh/id_rsa_private.pub
     op get document id_rsa_private > ~/.ssh/id_rsa # op edit document id_rsa_private ~/.ssh/id_rsa_private
+
+    git config --global user.email $EMAIL
 fi
 
 read -p "Billie email : " BILLIE_EMAIL
@@ -33,6 +35,8 @@ if [[ ! -z "${BILLIE_EMAIL}" ]]; then
     op get document .billie.sh > ~/.billie.sh # op edit document .billie.sh ~/.billie.sh
     op get document id_rsa.pub > ~/.ssh/id_rsa.pub # op edit document id_rsa.pub ~/.ssh/id_rsa.pub
     op get document id_rsa > ~/.ssh/id_rsa # op edit document id_rsa ~/.ssh/id_rsa
+
+    git config --global user.email $BILLIE_EMAIL
 else
 
 chmod 600 ~/.ssh/*
