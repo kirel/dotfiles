@@ -1,7 +1,4 @@
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-sudo chgrp -R admin $(brew --prefix)/*
-sudo chmod -R g+w $(brew --prefix)/*
+mkdir ~/homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C ~/homebrew
 
 brew install --cask \
     1password \
@@ -33,7 +30,7 @@ if [[ ! -z "${BILLIE_EMAIL}" ]]; then
     op get document .billie.sh > ~/.billie.sh # op edit document .billie.sh ~/.billie.sh
     op get document id_rsa.pub > ~/.ssh/id_rsa.pub # op edit document id_rsa.pub ~/.ssh/id_rsa.pub
     op get document id_rsa > ~/.ssh/id_rsa # op edit document id_rsa ~/.ssh/id_rsa
-else
+fi
 
 chmod 600 ~/.ssh/*
 chmod 644 ~/.ssh/*.pub
@@ -42,7 +39,7 @@ chmod 644 ~/.ssh/*.pub
 brew install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # This repo
-git clone git@github.com:kirel/dotfiles.git ~/.dotfiles
+[ ! -d "~/.dotfiles" ] && git clone git@github.com:kirel/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles && rake && cd -
 
 # Other apps

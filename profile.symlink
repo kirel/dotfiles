@@ -1,6 +1,8 @@
 export EDITOR='code -w' # ssh?
 export SVN_EDITOR=$EDITOR
 export VISUAL=$EDITOR
+# brew
+export BREW_BIN="~/homebrew/bin"
 # java
 export JAVA_HOME=$(/usr/libexec/java_home)
 export JAVA_OPTS="$JAVA_OPTS -Xms512m -Xmx1024m -XX:MaxPermSize=256m"
@@ -19,7 +21,7 @@ export HEROKU_BIN="/usr/local/heroku/bin"
 # php
 export COMPOSER_BIN="~/.composer/vendor/bin"
 # path
-export PATH=$NODE_BIN:$STACK_BIN:$CABAL_BIN:$HASKELL_BIN:$TEX_BIN:$HEROKU_BIN:$COMPOSER_BIN:$PATH
+export PATH=$BREW_BIN:$NODE_BIN:$STACK_BIN:$CABAL_BIN:$HASKELL_BIN:$TEX_BIN:$HEROKU_BIN:$COMPOSER_BIN:$PATH
 # fix jslint
 export JS_CMD=`which node`
 # ruby performance
