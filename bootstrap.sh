@@ -61,7 +61,6 @@ brew install \
   jq \
   mariadb-connector-c \
   ncdu \
-  openjdk \
   pipenv \
   prettyping \
   pyenv \
@@ -69,7 +68,6 @@ brew install \
   rbenv \
   ripgrep \
   ruby-build \
-  subversion \
   tmux \
   tree \
   wget \
@@ -80,16 +78,15 @@ brew install \
 
 # brew list -1 --cask | gsed 's/\(.*\)/  \1 \\/' | pbcopy
 brew install --cask \
-  1password \
-  1password-cli \
+  adoptopenjdk \
   alfred \
   appzapper \
   dash \
   discord \
   docker \
   fantastical \
-  font-fira-code \
-  font-fira-mono-for-powerline \
+  homebrew/cask-fonts/font-fira-code \
+  homebrew/cask-fonts/font-fira-mono-for-powerline \
   google-cloud-sdk \
   google-drive-file-stream \
   gpg-suite \
