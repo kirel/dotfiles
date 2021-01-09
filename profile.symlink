@@ -74,8 +74,8 @@ if which pyenv > /dev/null;
 fi
 
 # rbenv # via oh-my-zsh plugin
-# export RBENV_ROOT=/usr/local/var/rbenv
-# if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$($BREW_BIN/brew --prefix openssl@1.1)"
 
 export RPROMPT="\$(virtualenv_prompt_info) \$(pyenv_prompt_info) \$(rbenv_prompt_info)"
 
