@@ -45,47 +45,55 @@ cd ~/.dotfiles && rake && cd -
 # Other apps
 # brew list -1 --formula | gsed 's/\(.*\)/  \1 \\/' | pbcopy
 brew install \
-    bat \
-    curl \
-    fzf \
-    gh \
-    git \
-    git-crypt \
-    git-lfs \
-    gnu-sed \
-    htop \
-    hub \
-    jq \
-    mariadb-connector-c \
-    ncdu \
-    openjdk \
-    pipenv \
-    prettyping \
-    pyenv \
-    r \
-    rbenv \
-    ruby-build \
-    subversion \
-    the_silver_searcher \
-    tmux \
-    tree \
-    wget \
-    xsv \
-    z
+  bat \
+  curl \
+  dvc \
+  fd \
+  ffmpeg \
+  fzf \
+  gh \
+  git \
+  git-crypt \
+  git-lfs \
+  gnu-sed \
+  htop \
+  hub \
+  jq \
+  mariadb-connector-c \
+  ncdu \
+  openjdk \
+  pipenv \
+  prettyping \
+  pyenv \
+  r \
+  rbenv \
+  ripgrep \
+  ruby-build \
+  subversion \
+  tmux \
+  tree \
+  wget \
+  xsv \
+  xz \
+  z \
+  zsh
 
 # brew list -1 --cask | gsed 's/\(.*\)/  \1 \\/' | pbcopy
 brew install --cask \
   1password \
   1password-cli \
+  alfred \
   appzapper \
   dash \
   discord \
   docker \
   fantastical \
+  font-fira-code \
   font-fira-mono-for-powerline \
   google-cloud-sdk \
   google-drive-file-stream \
   gpg-suite \
+  istat-menus \
   iterm2 \
   keyboard-cleaner \
   latexit \
@@ -94,6 +102,7 @@ brew install --cask \
   microsoft-edge \
   microsoft-office \
   ngrok \
+  notion \
   nvidia-geforce-now \
   qlcolorcode \
   qlimagesize \
@@ -103,6 +112,7 @@ brew install --cask \
   quicklook-json \
   quicklookase \
   rectangle \
+  rescuetime \
   rowanj-gitx \
   rstudio \
   shadow \
