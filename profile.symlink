@@ -2,7 +2,7 @@ export EDITOR='code -w' # ssh?
 export SVN_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 # brew
-export BREW_BIN="~/homebrew/bin"
+export BREW_BIN="$HOME/homebrew/bin"
 # java
 export JAVA_HOME=$(/usr/libexec/java_home)
 export JAVA_OPTS="$JAVA_OPTS -Xms512m -Xmx1024m -XX:MaxPermSize=256m"
