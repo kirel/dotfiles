@@ -77,7 +77,7 @@ brew install \
   zsh
 
 # brew list -1 --cask | gsed 's/\(.*\)/  \1 \\/' | pbcopy
-brew install --cask \
+brew install -f --cask \
   adoptopenjdk \
   alfred \
   appzapper \
