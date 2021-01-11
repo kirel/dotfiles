@@ -1,7 +1,4 @@
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-sudo chgrp -R admin $(brew --prefix)/*
-sudo chmod -R g+w $(brew --prefix)/*
+mkdir ~/homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C ~/homebrew
 
 brew install --cask \
     1password \
@@ -34,10 +31,9 @@ if [[ ! -z "${BILLIE_EMAIL}" ]]; then
     eval $(op signin billie_team)
     op get document .billie.sh > ~/.billie.sh # op edit document .billie.sh ~/.billie.sh
     op get document id_rsa.pub > ~/.ssh/id_rsa.pub # op edit document id_rsa.pub ~/.ssh/id_rsa.pub
-    op get document id_rsa > ~/.ssh/id_rsa # op edit document id_rsa ~/.ssh/id_rsa
 
     git config --global user.email $BILLIE_EMAIL
-else
+fi
 
 chmod 600 ~/.ssh/*
 chmod 644 ~/.ssh/*.pub
@@ -46,53 +42,58 @@ chmod 644 ~/.ssh/*.pub
 brew install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # This repo
-git clone git@github.com:kirel/dotfiles.git ~/.dotfiles
+[ ! -d "~/.dotfiles" ] && git clone git@github.com:kirel/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles && rake && cd -
 
 # Other apps
 # brew list -1 --formula | gsed 's/\(.*\)/  \1 \\/' | pbcopy
 brew install \
-    bat \
-    curl \
-    fzf \
-    gh \
-    git \
-    git-crypt \
-    git-lfs \
-    gnu-sed \
-    htop \
-    hub \
-    jq \
-    mariadb-connector-c \
-    ncdu \
-    openjdk \
-    pipenv \
-    prettyping \
-    pyenv \
-    r \
-    rbenv \
-    ruby-build \
-    subversion \
-    the_silver_searcher \
-    tmux \
-    tree \
-    wget \
-    xsv \
-    z
+  bat \
+  curl \
+  dvc \
+  fd \
+  ffmpeg \
+  fzf \
+  gh \
+  git \
+  git-crypt \
+  git-lfs \
+  gnu-sed \
+  htop \
+  hub \
+  jq \
+  mariadb-connector-c \
+  ncdu \
+  pipenv \
+  prettyping \
+  pyenv \
+  r \
+  rbenv \
+  ripgrep \
+  ruby-build \
+  tmux \
+  tree \
+  wget \
+  xsv \
+  xz \
+  z \
+  zsh
 
 # brew list -1 --cask | gsed 's/\(.*\)/  \1 \\/' | pbcopy
-brew install --cask \
-  1password \
-  1password-cli \
+brew install -f --cask \
+  adoptopenjdk \
+  alfred \
   appzapper \
   dash \
   discord \
   docker \
   fantastical \
-  font-fira-mono-for-powerline \
+  homebrew/cask-fonts/font-fira-code \
+  homebrew/cask-fonts/font-fira-mono-for-powerline \
   google-cloud-sdk \
   google-drive-file-stream \
   gpg-suite \
+  istat-menus \
   iterm2 \
   keyboard-cleaner \
   latexit \
@@ -101,6 +102,7 @@ brew install --cask \
   microsoft-edge \
   microsoft-office \
   ngrok \
+  notion \
   nvidia-geforce-now \
   qlcolorcode \
   qlimagesize \
@@ -110,6 +112,7 @@ brew install --cask \
   quicklook-json \
   quicklookase \
   rectangle \
+  rescuetime \
   rowanj-gitx \
   rstudio \
   shadow \
