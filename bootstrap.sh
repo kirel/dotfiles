@@ -56,6 +56,7 @@ brew install \
   fzf \
   gh \
   git \
+  git-delta \
   git-crypt \
   git-lfs \
   gnu-sed \
