@@ -43,12 +43,12 @@ chmod 600 ~/.ssh/*
 chmod 644 ~/.ssh/*.pub
 
 # zsh
-brew install zsh
+$HOME/homebrew/bin/brew install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # This repo
 [ ! -d "~/.dotfiles" ] && git clone git@github.com:kirel/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles && rake && cd -
 
-brew bundle
+$HOME/homebrew/bin/brew bundle
 
 
