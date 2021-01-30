@@ -28,7 +28,7 @@ fi
 read -p "Billie email : " BILLIE_EMAIL
 
 if [[ ! -z "${BILLIE_EMAIL}" ]]; then
-    op signin my $BILLIE_EMAIL
+    op signin billie-team $BILLIE_EMAIL
 
     # Billie 1password account
     eval $(op signin billie_team)
