@@ -34,6 +34,7 @@ if [[ ! -z "${BILLIE_EMAIL}" ]]; then
     eval $(op signin billie_team)
     op get document .billie.sh > ~/.billie.sh # op edit document .billie.sh ~/.billie.sh
     op get document id_rsa.pub > ~/.ssh/id_rsa.pub # op edit document id_rsa.pub ~/.ssh/id_rsa.pub
+    op get document id_rsa > ~/.ssh/id_rsa # op edit document id_rsa ~/.ssh/id_rsa
 
     git config --global user.email $BILLIE_EMAIL
 fi
