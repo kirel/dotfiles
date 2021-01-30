@@ -1,6 +1,6 @@
-mkdir ~/homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C ~/homebrew
+mkdir -p $HOME/homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C ~/homebrew
 
-brew install --cask \
+$HOME/homebrew/bin/brew install --cask \
     1password \
     1password-cli
 
