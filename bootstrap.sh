@@ -46,8 +46,6 @@ $HOME/homebrew/bin/brew install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # This repo
 [ ! -d "~/.dotfiles" ] && git clone git@github.com:kirel/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles && rake && cd -
-
-$HOME/homebrew/bin/brew bundle
+cd ~/.dotfiles && rake && $HOME/homebrew/bin/brew bundle && cd -
 
 
