@@ -1,0 +1,28 @@
+[user]
+	name = Daniel Kirsch
+	email = danishkirel@gmail.com
+
+[core]
+	editor = code -w
+	pager = delta
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = false
+
+[merge]
+	conflictstyle = diff3
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = side-by-side line-numbers decorations
+    whitespace-error-style = 22 reverse
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
