@@ -60,12 +60,16 @@ fi
 #export LDFLAGS="-L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
 
 # rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$($BREW_BIN/brew --prefix openssl@1.1)"
+load_rbenv () {
+  if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+  export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$($BREW_BIN/brew --prefix openssl@1.1)"
+}
 
 # nvm
-export NVM_DIR="~/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+load_nvm () {
+    export NVM_DIR=~/.nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+}
 
 # git stuff
 function git() { hub "$@"; }
