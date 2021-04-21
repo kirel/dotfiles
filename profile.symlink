@@ -56,6 +56,8 @@ if which pyenv > /dev/null;
       echo "$(pyenv version-name)"
   }
 fi
+#export CFLAGS="-I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include -I$(xcrun --show-sdk-path)/usr/include"
+#export LDFLAGS="-L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
 
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
