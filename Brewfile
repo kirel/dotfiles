@@ -60,12 +60,15 @@ cask "iterm2"
 cask "keyboard-cleaner"
 cask "latexit"
 cask "launchbar"
+cask "mas"
 cask "microsoft-auto-update"
 cask "microsoft-edge"
 cask "microsoft-office"
 cask "ngrok"
 cask "notion"
 cask "nvidia-geforce-now"
+cask "parsec"
+cask "philips-hue-sync"
 cask "qlcolorcode"
 cask "qlimagesize"
 cask "qlmarkdown"
@@ -81,6 +84,7 @@ cask "shadow"
 cask "signal"
 cask "skype"
 cask "slack"
+cask "spotify"
 cask "steelseries-exactmouse-tool"
 cask "steelseries-engine"
 cask "suspicious-package"
@@ -95,3 +99,24 @@ cask "visual-studio-code"
 cask "webpquicklook"
 cask "whatsapp"
 cask "zoom"
+
+# Mac App Store
+mas "Amphetamine", id: 937984704
+mas "Cardhop", id: 1290358394
+mas "Evernote", id: 406056744
+mas "Evernote Web Clipper", id: 1481669779
+mas "Grammarly for Safari", id: 1462114288
+mas "Journey", id: 1300202543
+mas "Keynote", id: 409183694
+mas "MoneyMoney", id: 872698314
+mas "Monosnap", id: 540348655
+mas "Notability", id: 736189492
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Pocket", id: 568494494
+mas "PopClip", id: 445189367
+mas "Save to Pocket", id: 1477385213
+mas "Tab Space", id: 1473726602
+mas "Todoist", id: 585829637
+mas "Twitter", id: 1482454543
+mas "Xcode", id: 497799835
