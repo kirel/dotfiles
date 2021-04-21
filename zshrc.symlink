@@ -7,7 +7,7 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="agnoster"
-DEFAULT_USER="danielkirsch"
+DEFAULT_USER="billie"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -43,6 +43,8 @@ DEFAULT_USER="danielkirsch"
 # in the history command output. The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|
 # yyyy-mm-dd
 # HIST_STAMPS="mm/dd/yyyy"
+HISTSIZE=1000
+SAVEHIST=1000
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
