@@ -49,9 +49,11 @@ export CONDA_BIN="/Users/danielkirsch/anaconda3/bin"
 alias ana="echo \"Activating anaconda\" && export PATH=$CONDA_BIN:$PATH"
 
 # Pyenv
-export PYENV_ROOT=~/.pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
 if which pyenv > /dev/null;
-  then eval "$(pyenv init -)";
+  then
+  eval "$(pyenv init --path)";
   function pyenv_prompt_info() {
       echo "$(pyenv version-name)"
   }
