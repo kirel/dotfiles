@@ -49,6 +49,8 @@ export CONDA_BIN="/Users/danielkirsch/anaconda3/bin"
 # path
 alias ana="echo \"Activating anaconda\" && export PATH=$CONDA_BIN:$PATH"
 
+export RSTUDIO_WHICH_R="$BREW_BIN/R"
+
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
