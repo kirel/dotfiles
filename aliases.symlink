@@ -9,4 +9,8 @@ alias ping='prettyping --nolegend'
 alias top="sudo htop"
 alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 
-alias sidetone='sox --buffer 512 -v 3 -d -d'
+alias r="radian"
+
+alias sidetone='sox --buffer 128 -v 1 -d -d'
+alias ls=exa
+alias l=exa -lah

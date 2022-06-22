@@ -1,0 +1,2 @@
+options(radian.color_scheme = "solarizedlight")
+options(radian.editing_mode = "vi")
