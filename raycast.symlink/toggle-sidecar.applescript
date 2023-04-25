@@ -14,28 +14,54 @@
 # @raycast.author Marcos Sánchez-Dehesa
 # @raycast.authorURL https://www.github.com/dehesa
 
-# The name of the device to be connected as a sidecar screen (e.g. the name of your iPad).
-# You can figure out the exact device's name by going to System Preferences > Displays > Add Display.
-set displayName to "Tabletgerät"
-# If your system is not in English, you should change this text to text display in the pop up menu item in System Preferences > Displays > Add Display.
-set menuItemName to "Display hinzufügen"
-# The System Preferences > Displays screen takes a long time to load (I don't know why). This delay waits for the screen to properly load. Your system may need less or more seconds. Do some trial and errors.
-set delayInSeconds to 1.8
+# From https://github.com/ijoseph/connect-sidecar/blob/main/Connect%20Sidecar%20-%20Ventura.applescript
 
-tell application "System Preferences"
-	activate
-	set current pane to pane id "com.apple.preference.displays"
-	
-	delay delayInSeconds
-	
+set IPAD_NAME to  "Tabletgerät"
+-- Change the above line to the name of your iPad.
+-- Note the likelihood of the *right* single quotation mark, `’`(Unicode Codepoint 2019) character being used for possession,
+-- which you might want to copy and paste, as it's not the same as the non-slanted one on the keyboard,`'` (Unicode Codepoint 27).
+
+on sidecar_connection(ipad_name)
 	tell application "System Events"
-		tell first window of application process "System Preferences"
-			tell pop up button menuItemName
-				click
-				click menu item displayName of menu menuItemName
+		tell application process "System Settings"
+			repeat until exists pop up button 1 of group 1 of group 2 of splitter group 1 of group 1 of window 1
+				delay 0
+			end repeat
+
+			tell splitter group 1 of group 1 of window 1
+				tell pop up button 1 of group 1 of group 2
+					click
+					delay 0.5
+					set add_display_items to name of menu items of menu 1 as list
+					#set add_display_items to item 1 of add_display_items
+					log add_display_items
+					set sel_item to 0
+					set section_break to 0
+					repeat with i from 1 to number of items in add_display_items
+						if item i of add_display_items = missing value then
+							set section_break to i
+							exit repeat
+						end if
+					end repeat
+					if section_break = 0 then
+						set section_break to 1
+					end if
+					repeat with i from section_break to number of items in add_display_items
+						if item i of add_display_items = ipad_name then
+							set sel_item to i
+							log sel_item
+							exit repeat
+						end if
+					end repeat
+					click menu item sel_item of menu 1
+					return sel_item
+				end tell
 			end tell
 		end tell
 	end tell
-	
-	quit
-end tell
+end sidecar_connection
+
+do shell script "/usr/bin/open file:///System/Library/PreferencePanes/Displays.prefPane/"
+delay 1
+
+sidecar_connection(IPAD_NAME)
