@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # @raycast.schemaVersion 1
-# @raycast.title Switch Audio to Mac Speakers and Microphone
+# @raycast.title Switch Audio to Mac Speakers and USB Microphone
 # @raycast.mode silent
 # @raycast.icon 💻
 

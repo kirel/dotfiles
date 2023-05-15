@@ -1,12 +1,12 @@
 #!/bin/sh
 
 # @raycast.schemaVersion 1
-# @raycast.title Switch Audio to Headphone
+# @raycast.title Switch Audio to Headphones
 # @raycast.mode silent
 # @raycast.icon 🎧
 
 source ~/.profile
 
-switchaudiosource -s "Arctis 7P+"
-switchaudiosource -s "Arctis 7P+" -t input
-switchaudiosource -s "Arctis 7P+" -t system
+switchaudiosource -s "Arctis Nova 7"
+switchaudiosource -s "Arctis Nova 7" -t input
+switchaudiosource -s "Arctis Nova 7" -t system
