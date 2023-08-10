@@ -7,6 +7,7 @@ export PATH="$HOME/homebrew/bin:$PATH"
 sudo chgrp -R admin /Applications/* 
 sudo chmod -R g+rwX /Applications/*
 
+$HOME/homebrew/bin/brew install -f --cask \
     1password \
     1password-cli
 
