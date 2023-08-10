@@ -18,13 +18,11 @@ touch ~/.ssh/authorized_keys
 read -p "Email : " EMAIL
 
 if [[ ! -z "${EMAIL}" ]]; then
-    op signin my $EMAIL
-
     # my secrets
-    eval $(op signin my)
-    op get document .secrets.sh > ~/.secrets.sh # op edit document .secrets.sh ~/.secrets.sh
-    op get document id_rsa_private.pub > ~/.ssh/id_rsa.pub # op edit document id_rsa_private.pub ~/.ssh/id_rsa_private.pub
-    op get document id_rsa_private > ~/.ssh/id_rsa # op edit document id_rsa_private ~/.ssh/id_rsa_private
+    eval $(op signin --account my)
+    op document get .secrets.sh > ~/.secrets.sh # op edit document .secrets.sh ~/.secrets.sh
+    op document get id_rsa_private.pub > ~/.ssh/id_rsa.pub # op edit document id_rsa_private.pub ~/.ssh/id_rsa_private.pub
+    op document get id_rsa_private > ~/.ssh/id_rsa # op edit document id_rsa_private ~/.ssh/id_rsa_private
 
     git config --global user.email $EMAIL
 fi
@@ -32,13 +30,11 @@ fi
 read -p "Billie email : " BILLIE_EMAIL
 
 if [[ ! -z "${BILLIE_EMAIL}" ]]; then
-    op signin billie-team $BILLIE_EMAIL
-
     # Billie 1password account
-    eval $(op signin billie_team)
-    op get document .billie.sh > ~/.billie.sh # op edit document .billie.sh ~/.billie.sh
-    op get document id_rsa.pub > ~/.ssh/id_rsa.pub # op edit document id_rsa.pub ~/.ssh/id_rsa.pub
-    op get document id_rsa > ~/.ssh/id_rsa # op edit document id_rsa ~/.ssh/id_rsa
+    eval $(op signin --account billie_team)
+    op document get .billie.sh > ~/.billie.sh # op edit document .billie.sh ~/.billie.sh
+    op document get id_rsa.pub > ~/.ssh/id_rsa.pub # op edit document id_rsa.pub ~/.ssh/id_rsa.pub
+    op document get id_rsa > ~/.ssh/id_rsa # op edit document id_rsa ~/.ssh/id_rsa
 
     git config --global user.email $BILLIE_EMAIL
 fi
