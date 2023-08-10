@@ -15,4 +15,4 @@ alias snowsql=/Applications/SnowSQL.app/Contents/MacOS/snowsql
 
 alias sidetone='sox --buffer 128 -v 1 -d -d'
 alias ls=exa
-alias l=exa -lah
+alias l="exa -lah"
