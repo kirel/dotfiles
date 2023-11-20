@@ -41,7 +41,7 @@ export PIP_RESPECT_VIRTUALENV=true
 #export PIP_REQUIRE_VIRTUALENV=true
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 #export PIPENV_VENV_IN_PROJECT=1
-export SYSTEM_VERSION_COMPAT=1
+export SYSTEM_VERSION_COMPAT=0
 
 # Anaconda
 export CONDA_BIN="/Users/danielkirsch/anaconda3/bin"
