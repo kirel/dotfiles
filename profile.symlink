@@ -4,10 +4,6 @@ export VISUAL=$EDITOR
 # brew
 export BREW_BIN="$HOME/homebrew/bin"
 export BREW_SBIN="$HOME/homebrew/sbin"
-# java
-export JAVA_HOME=$(/usr/libexec/java_home)
-export JAVA_OPTS="$JAVA_OPTS -Xms512m -Xmx1024m -XX:MaxPermSize=256m"
-export SBT_OPTS="-XX:MaxPermSize=256m"
 # node
 export NODE_PATH="/usr/local/lib/node:/usr/local/lib/node_modules"
 export NODE_BIN="/usr/local/share/npm/bin"
@@ -23,6 +19,11 @@ export HEROKU_BIN="/usr/local/heroku/bin"
 export COMPOSER_BIN="~/.composer/vendor/bin"
 # path
 export PATH=$BREW_BIN:$BREW_SBIN:$NODE_BIN:$STACK_BIN:$CABAL_BIN:$HASKELL_BIN:$TEX_BIN:$HEROKU_BIN:$COMPOSER_BIN:$PATH
+# java
+# export JAVA_HOME=$(/usr/libexec/java_home)
+eval "$(jenv init -)"
+export JAVA_OPTS="$JAVA_OPTS -Xms512m -Xmx1024m -XX:MaxPermSize=256m"
+export SBT_OPTS="-XX:MaxPermSize=256m"
 # fix jslint
 export JS_CMD=`which node`
 # ruby performance
@@ -42,6 +43,9 @@ export PIP_RESPECT_VIRTUALENV=true
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 #export PIPENV_VENV_IN_PROJECT=1
 export SYSTEM_VERSION_COMPAT=1
+
+# direnv
+eval "$(direnv hook zsh)"
 
 # Anaconda
 export CONDA_BIN="/Users/danielkirsch/anaconda3/bin"

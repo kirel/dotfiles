@@ -8,5 +8,5 @@
 source ~/.profile
 
 switchaudiosource -s "Arctis Nova 7"
-switchaudiosource -s "MacBook Pro-Mikrofon" -t input
+switchaudiosource -s "MacBook Pro Microphone" -t input
 switchaudiosource -s "Arctis Nova 7" -t system

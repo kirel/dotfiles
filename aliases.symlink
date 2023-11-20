@@ -3,7 +3,7 @@ alias vansible='ansible all -i .vagrant/provisioners/ansible/inventory/vagrant_a
 alias vansible-playbook='ansible-playbook -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory --private-key=~/.vagrant.d/insecure_private_key -u vagrant'
 
 alias grmm='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
-alias cat="bat --theme=\$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo default || echo GitHub)"
+alias cat="bat --theme=zenburn"
 
 alias ping='prettyping --nolegend'
 alias top="sudo htop"
@@ -14,5 +14,5 @@ alias r="radian"
 alias snowsql=/Applications/SnowSQL.app/Contents/MacOS/snowsql
 
 alias sidetone='sox --buffer 128 -v 1 -d -d'
-alias ls=exa
-alias l="exa -lah"
+alias ls=eza
+alias l="eza -lah"
