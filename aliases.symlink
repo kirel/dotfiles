@@ -19,3 +19,4 @@ alias l="eza -lah"
 
 alias brewup="brew update && brew upgrade && brew cleanup && brew autoremove && brew cu"
 alias tmosh='() {mosh $* -- sh -c "tmux a || tmux"}'
+alias zmosh='() {mosh $* -- sh -c "zellij a -c default"}'
