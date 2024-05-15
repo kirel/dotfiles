@@ -26,3 +26,6 @@ function op2env() {
         echo "${key}=\${${key}}"
     done < "$input_file" | op run --no-masking --env-file="$input_file" -- envsubst > .env
 }
+
+alias tmosh='() {mosh $* -- sh -c "tmux a || tmux"}'
+alias zmosh='() {mosh $* -- sh -c "zellij a -c default"}'

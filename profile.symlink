@@ -101,3 +101,6 @@ eval "$(hub alias -s)"
 [[ -a ~/code/ds-aws/aws.sh ]] && source ~/code/ds-aws/aws.sh
 
 export RPROMPT="\$(virtualenv_prompt_info) \$(pyenv_prompt_info) \$(rbenv_prompt_info)"
+
+# ollama
+export OLLAMA_HOST="http://um:11434"
