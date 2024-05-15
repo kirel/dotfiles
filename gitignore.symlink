@@ -1,6 +1,29 @@
-.DS_Store
 .svn
 .sass-cache
-*~
 *.sw[nop]
 tags
+
+# Node
+npm-debug.log
+
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# WebStorm
+.idea/
+.vscode/
+
+# vi
+*~
+
+# General
+log/
+*.log
+
+# etc...
+.env
+.envrc
+.java-version
