@@ -17,8 +17,10 @@ export TEX_BIN="/Library/TeX/texbin"
 export HEROKU_BIN="/usr/local/heroku/bin"
 # php
 export COMPOSER_BIN="~/.composer/vendor/bin"
+# idea
+export IDEA_BIN="/Applications/IntelliJ IDEA CE.app/Contents/MacOS"
 # path
-export PATH=$BREW_BIN:$BREW_SBIN:$NODE_BIN:$STACK_BIN:$CABAL_BIN:$HASKELL_BIN:$TEX_BIN:$HEROKU_BIN:$COMPOSER_BIN:$PATH
+export PATH=$IDEA_BIN:$BREW_BIN:$BREW_SBIN:$NODE_BIN:$STACK_BIN:$CABAL_BIN:$HASKELL_BIN:$TEX_BIN:$HEROKU_BIN:$COMPOSER_BIN:$PATH
 # java
 # export JAVA_HOME=$(/usr/libexec/java_home)
 eval "$(jenv init -)"
