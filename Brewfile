@@ -11,7 +11,7 @@ brew "xz"
 brew "bat"
 brew "curl"
 brew "dvc"
-brew "exa"
+brew "eza"
 brew "fd"
 brew "ffmpeg"
 brew "fzf"
@@ -35,12 +35,16 @@ brew "ruby-build"
 brew "rbenv"
 brew "ripgrep"
 brew "svn"
-brew "tmux"
 brew "tree"
 brew "wget"
 brew "xsv"
+brew "yazi"
+brew "ffmpegthumbnailer"
+brew "unar"
 brew "z"
 brew "zsh"
+brew "zellij"
+brew "zoxide"
 brew "mas"
 
 # Casks
@@ -109,6 +113,7 @@ mas "Monosnap", id: 540348655
 mas "Notability", id: 736189492
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
+mas "Passepartout", id: 1433648537
 mas "Pocket", id: 568494494
 mas "PopClip", id: 445189367
 mas "Save to Pocket", id: 1477385213
