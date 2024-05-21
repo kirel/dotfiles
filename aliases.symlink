@@ -18,5 +18,14 @@ alias ls=eza
 alias l="eza -lah"
 
 alias brewup="brew update && brew upgrade && brew cleanup && brew autoremove && brew cu"
+
+function op2env() {
+    input_file="${1:-.env.example}"
+    while IFS= read -r line || [[ -n "$line" ]]; do
+        key="$(echo "$line" | awk -F "=" '{print $1}')"
+        echo "${key}=\${${key}}"
+    done < "$input_file" | op run --no-masking --env-file="$input_file" -- envsubst > .env
+}
+
 alias tmosh='() {mosh $* -- sh -c "tmux a || tmux"}'
 alias zmosh='() {mosh $* -- sh -c "zellij a -c default"}'

@@ -26,8 +26,11 @@ export TEX_BIN="/Library/TeX/texbin"
 export HEROKU_BIN="/usr/local/heroku/bin"
 ## php
 export COMPOSER_BIN="~/.composer/vendor/bin"
-## path
-export PATH=$BREW_BIN:$BREW_SBIN:$NODE_BIN:$STACK_BIN:$CABAL_BIN:$HASKELL_BIN:$TEX_BIN:$HEROKU_BIN:$COMPOSER_BIN:$PATH
+# idea
+export IDEA_BIN="/Applications/IntelliJ IDEA CE.app/Contents/MacOS"
+# path
+export PATH=$IDEA_BIN:$BREW_BIN:$BREW_SBIN:$NODE_BIN:$STACK_BIN:$CABAL_BIN:$HASKELL_BIN:$TEX_BIN:$HEROKU_BIN:$COMPOSER_BIN:$PATH
+
 ## java
 export JAVA_OPTS="$JAVA_OPTS -Xms512m -Xmx1024m -XX:MaxPermSize=256m"
 export SBT_OPTS="-XX:MaxPermSize=256m"
@@ -109,8 +112,6 @@ if command -v zoxide &> /dev/null; then
 else
   echo "Warning: zoxide is not installed or not in PATH."
 fi
-
-
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
