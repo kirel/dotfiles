@@ -105,7 +105,11 @@ else
 fi
 
 # fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if command -v fzf &> /dev/null; then
+  source <(fzf --zsh)
+else
+  echo "Warning: fzf is not installed or not in PATH."
+fi
 
 if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh)"
