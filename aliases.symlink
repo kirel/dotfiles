@@ -29,3 +29,7 @@ function op2env() {
 
 alias tmosh='() {mosh $* -- sh -c "tmux a || tmux"}'
 alias zmosh='() {mosh $* -- sh -c "zellij a -c default"}'
+
+function ollama_pull_all() {
+  ollama list | awk 'NR>1 && !/reviewer/ {system("ollama pull "$1)}'
+}
