@@ -1,13 +1,7 @@
 
 set -x
 
-mkdir -p $HOME/homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C ~/homebrew
-export PATH="$HOME/homebrew/bin:$PATH"
-
-sudo chgrp -R admin /Applications/* 
-sudo chmod -R g+rwX /Applications/*
-
-$HOME/homebrew/bin/brew install -f --cask \
+brew install -f --cask \
     1password \
     1password-cli
 
@@ -43,10 +37,10 @@ chmod 600 ~/.ssh/*
 chmod 644 ~/.ssh/*.pub
 
 # zsh
-$HOME/homebrew/bin/brew install zsh
+brew install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # This repo
 [ ! -d "~/.dotfiles" ] && git clone git@github.com:kirel/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles && rake && $HOME/homebrew/bin/brew bundle -v && cd -
+cd ~/.dotfiles && rake && brew bundle -v && cd -
 
 
