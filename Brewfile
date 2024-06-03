@@ -112,6 +112,7 @@ mas "Todoist", id: 585829637
 mas "Xcode", id: 497799835
 vscode "bierner.markdown-mermaid"
 vscode "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
+vscode "deerawan.vscode-dash"
 vscode "eamodio.gitlens"
 vscode "fwcd.kotlin"
 vscode "github.remotehub"
