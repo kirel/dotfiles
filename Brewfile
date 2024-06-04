@@ -51,11 +51,15 @@ cask "1password"
 cask "1password-cli"
 cask "arc"
 cask "balenaetcher"
+cask "bartender"
+cask "betaflight-configurator"
+cask "capcut"
 cask "discord"
 cask "docker"
 cask "fantastical"
 cask "font-fira-code"
 cask "font-fira-mono-for-powerline"
+cask "google-chrome"
 cask "google-drive"
 cask "gpg-suite"
 cask "istat-menus"
@@ -80,6 +84,7 @@ cask "r"
 cask "raycast"
 cask "rectangle"
 cask "rescuetime"
+cask "rocket"
 cask "rstudio"
 cask "signal"
 cask "skype"
@@ -104,6 +109,7 @@ mas "Notability", id: 736189492
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Passepartout", id: 1433648537
+mas "Playgrounds", id: 1496833156
 mas "Pocket", id: 568494494
 mas "PopClip", id: 445189367
 mas "Save to Pocket", id: 1477385213
