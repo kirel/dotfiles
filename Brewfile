@@ -107,7 +107,7 @@ mas "Cardhop", id: 1290358394
 mas "Keynote", id: 409183694
 mas "MoneyMoney", id: 872698314
 mas "Monosnap", id: 540348655
-mas "Notability", id: 736189492
+mas "Notability", id: 360593530
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Passepartout", id: 1433648537
