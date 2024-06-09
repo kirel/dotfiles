@@ -117,6 +117,13 @@ else
   echo "Warning: zoxide is not installed or not in PATH."
 fi
 
+# Add the thefuck alias evaluation if it's installed
+if command -v thefuck &> /dev/null; then
+  eval $(thefuck --alias)
+else
+  echo "Warning: thefuck is not installed or not in PATH."
+fi
+
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
