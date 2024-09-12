@@ -76,6 +76,11 @@ fi
 #export CFLAGS="-I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include -I$(xcrun --show-sdk-path)/usr/include"
 #export LDFLAGS="-L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
 
+if [ -f "$HOME/.rye/env" ]; then
+  source "$HOME/.rye/env"
+fi
+
+
 # rbenv
 load_rbenv () {
   if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -138,9 +143,6 @@ source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 # Prompt
 eval "$(starship init zsh)"
-
-# Zellij
-eval "$(zellij setup --generate-auto-start zsh)"
 
 # More imports
 [[ -a ~/.aliases ]] && source ~/.aliases
