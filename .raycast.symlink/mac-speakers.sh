@@ -7,6 +7,6 @@
 
 source ~/.profile
 
-switchaudiosource -s "MacBook Pro Speakers"
-switchaudiosource -s "MacBook Pro Speakers" -t system
+switchaudiosource -s "MacBook Pro-Lautsprecher"
+switchaudiosource -s "MacBook Pro-Lautsprecher" -t system
 switchaudiosource -s "Razer Seiren Mini" -t input
