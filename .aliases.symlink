@@ -18,6 +18,8 @@ alias ls=eza
 alias l="eza -lah"
 
 alias brewup="brew update && brew upgrade && brew cleanup && brew autoremove && brew cu"
+alias ollup='ollama list | awk '\''NR>1 && !/reviewer/ {print "Pulling model: "$1; system("ollama pull "$1)}'\'
+
 
 function op2env() {
     input_file="${1:-.env.example}"
