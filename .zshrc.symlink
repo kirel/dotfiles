@@ -148,3 +148,6 @@ eval "$(starship init zsh)"
 [[ -a ~/.aliases ]] && source ~/.aliases
 [[ -a ~/.secrets.sh ]] && source ~/.secrets.sh
 [[ -a ~/.billie.sh ]] && source ~/.billie.sh
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
