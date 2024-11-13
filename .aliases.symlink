@@ -32,6 +32,10 @@ function op2env() {
 alias tmosh='() {mosh $* -- sh -c "tmux a || tmux"}'
 alias zmosh='() {mosh $* -- sh -c "zellij a -c default"}'
 
-function ollama_pull_all() {
-  ollama list | awk 'NR>1 && !/reviewer/ {system("ollama pull "$1)}'
+ha_notify() {
+  curl -X POST \
+    -H "Authorization: Bearer $HASS_TOKEN" \
+    -H "Content-Type: application/json" \
+    -d "{\"message\": \"$1\"}" \
+    http://homelab-nuc.lan:8123/api/services/notify/daniel
 }
