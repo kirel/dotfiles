@@ -15,6 +15,10 @@ or
     brew bundle cleanup
     !! --force
 
+## Ansible
+
+    pipx run --spec ansible -- ansible-playbook -K ansible/enable_touchid_sudo.yaml
+
 ## Update secrets
 
 Edit `secrets.sh` then
