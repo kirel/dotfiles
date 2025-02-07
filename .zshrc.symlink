@@ -140,3 +140,7 @@ eval "$(starship init zsh)"
 [[ -a ~/.aliases ]] && source ~/.aliases
 [[ -a ~/.secrets.sh ]] && source ~/.secrets.sh
 [[ -a ~/.billie.sh ]] && source ~/.billie.sh
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/billie/.cache/lm-studio/bin"
+
