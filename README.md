@@ -23,7 +23,7 @@ or
 
 Edit `secrets.sh` then
 
-    op inject -fi secrets.sh -o ~/.secrets.sh && cat ~/.secrets.sh
+    update_secrets
 
 ## Desperate measures
 

@@ -16,7 +16,7 @@ if [[ ! -z "${EMAIL}" ]]; then
     eval $(op signin --account my)
     op document get id_rsa_private.pub > ~/.ssh/id_rsa.pub # op edit document id_rsa_private.pub ~/.ssh/id_rsa_private.pub
     op document get id_rsa_private > ~/.ssh/id_rsa # op edit document id_rsa_private ~/.ssh/id_rsa_private
-    op inject -i secrets.sh -o ~/secrets.sh
+    op inject -i .secrets.sh -o ~/.secrets.sh
 
     git config --global user.email $EMAIL
 fi
