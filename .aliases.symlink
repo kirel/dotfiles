@@ -3,7 +3,7 @@ alias vansible='ansible all -i .vagrant/provisioners/ansible/inventory/vagrant_a
 alias vansible-playbook='ansible-playbook -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory --private-key=~/.vagrant.d/insecure_private_key -u vagrant'
 
 alias grmm='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
-alias cat="bat --theme=zenburn"
+alias cat="bat --theme='Solarized (light)'"
 
 alias ping='prettyping --nolegend'
 alias top="sudo htop"
@@ -39,3 +39,5 @@ ha_notify() {
     -d "{\"message\": \"$1\"}" \
     http://homelab-nuc.lan:8123/api/services/notify/daniel
 }
+
+alias aider='uv tool run --from aider-chat --python python3.12 aider'

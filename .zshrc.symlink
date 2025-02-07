@@ -11,8 +11,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Path
 ## brew
-#export BREW_BIN="$(brew --prefix)/bin"
-#export BREW_SBIN="$(brew --prefix)/sbin"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 ## node
 export NODE_PATH="/usr/local/lib/node:/usr/local/lib/node_modules"
 export NODE_BIN="/usr/local/share/npm/bin"
@@ -57,13 +56,6 @@ export RSTUDIO_WHICH_R="$BREW_BIN/R"
 export OLLAMA_HOST="http://localhost:11434"
 
 # Language version managers
-
-## Java
-if command -v jenv &> /dev/null; then
-  eval "$(jenv init -)"
-else
-  echo "Warning: jenv is not installed or not in PATH."
-fi
 
 # Python
 export PYENV_ROOT="$HOME/.pyenv"
@@ -147,6 +139,9 @@ eval "$(starship init zsh)"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-
 # Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/daniel/.cache/lm-studio/bin"
+export PATH="$PATH:/Users/billie/.cache/lm-studio/bin"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
