@@ -76,10 +76,6 @@ fi
 #export CFLAGS="-I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include -I$(xcrun --show-sdk-path)/usr/include"
 #export LDFLAGS="-L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
 
-if [ -f "$HOME/.rye/env" ]; then
-  source "$HOME/.rye/env"
-fi
-
 
 # rbenv
 load_rbenv () {
@@ -151,3 +147,6 @@ eval "$(starship init zsh)"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/daniel/.cache/lm-studio/bin"
