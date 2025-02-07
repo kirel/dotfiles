@@ -14,9 +14,9 @@ read -p "Email : " EMAIL
 if [[ ! -z "${EMAIL}" ]]; then
     # my secrets
     eval $(op signin --account my)
-    op document get .secrets.sh > ~/.secrets.sh # op edit document .secrets.sh ~/.secrets.sh
     op document get id_rsa_private.pub > ~/.ssh/id_rsa.pub # op edit document id_rsa_private.pub ~/.ssh/id_rsa_private.pub
     op document get id_rsa_private > ~/.ssh/id_rsa # op edit document id_rsa_private ~/.ssh/id_rsa_private
+    op inject -i secrets.sh -o ~/secrets.sh
 
     git config --global user.email $EMAIL
 fi

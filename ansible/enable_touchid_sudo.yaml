@@ -1,0 +1,34 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+
+    - name: Check if Touch ID for sudo is already enabled
+      command: grep "auth sufficient pam_tid.so" /etc/pam.d/sudo
+      register: grep_result
+      changed_when: false
+      failed_when: false
+
+    - name: Enable Touch ID for sudo
+      lineinfile:
+        path: /etc/pam.d/sudo
+        insertbefore: BOF
+        line: "auth sufficient pam_tid.so"
+      when: grep_result.rc != 0
+
+    - name: Verify Touch ID is enabled for sudo
+      command: grep "auth sufficient pam_tid.so" /etc/pam.d/sudo
+      register: verify_result
+      changed_when: false
+      failed_when: verify_result.rc != 0
+
+    - name: Check iTerm2 Touch ID compatibility setting
+      command: defaults read com.googlecode.iterm2 BootstrapDaemon
+      register: iterm_setting
+      changed_when: false
+      failed_when: false
+      
+    - name: Warn about iTerm2 incompatibility
+      debug:
+        msg: "Warning: iTerm2 'Allow sessions to survive logging out and back in' setting may interfere with Touch ID for sudo. Please disable this in iTerm2 preferences."
+      when: iterm_setting.stdout != "0"
