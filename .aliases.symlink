@@ -46,3 +46,6 @@ update_secrets() {
 }
 
 alias aider='uv tool run --from aider-chat --python python3.12 aider'
+alias aider-google-free='aider --architect --watch-files --model gemini/gemini-2.0-flash-thinking-exp --editor-model gemini/gemini-exp-1206'
+alias aider-r1-free='aider --model openrouter/deepseek/deepseek-r1:free'
+alias aider-r1='aider --model openrouter/deepseek/deepseek-r1'
