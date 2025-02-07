@@ -3,7 +3,7 @@ alias vansible='ansible all -i .vagrant/provisioners/ansible/inventory/vagrant_a
 alias vansible-playbook='ansible-playbook -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory --private-key=~/.vagrant.d/insecure_private_key -u vagrant'
 
 alias grmm='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
-alias cat="bat --theme=zenburn"
+alias cat="bat --theme='Solarized (light)'"
 
 alias ping='prettyping --nolegend'
 alias top="sudo htop"
@@ -35,3 +35,5 @@ alias zmosh='() {mosh $* -- sh -c "zellij a -c default"}'
 function ollama_pull_all() {
   ollama list | awk 'NR>1 && !/reviewer/ {system("ollama pull "$1)}'
 }
+
+alias aider='uv tool run --from aider-chat --python python3.12 aider'
