@@ -1,0 +1,76 @@
+#!/bin/bash
+# This script downloads the latest release of gRPCServerCLI-macOS,
+# installs it in ~/.local/bin, makes it executable, and unquarantines it (macOS).
+
+# GitHub repository details
+REPO="drawthingsai/draw-things-community"
+ASSET_NAME="gRPCServerCLI-macOS"
+
+# GitHub API endpoint for the latest release
+GITHUB_API="https://api.github.com/repos/${REPO}/releases/latest"
+
+# Installation directory
+INSTALL_DIR="$HOME/.local/bin"
+
+# Check if jq is installed
+if ! command -v jq &> /dev/null; then
+  echo "jq is required but not installed. Please install jq and try again."
+  exit 1
+fi
+
+echo "Fetching latest release info from GitHub..."
+release_json=$(curl -s "$GITHUB_API")
+
+# Extract the latest release tag (version) and verify the response
+latest_tag=$(echo "$release_json" | jq -r '.tag_name')
+if [ -z "$latest_tag" ] || [ "$latest_tag" = "null" ]; then
+  echo "Failed to retrieve the latest release information."
+  exit 1
+fi
+echo "Latest version: $latest_tag"
+
+# Extract the browser_download_url for the desired asset
+download_url=$(echo "$release_json" | jq -r --arg name "$ASSET_NAME" '.assets[] | select(.name == $name) | .browser_download_url')
+if [ -z "$download_url" ] || [ "$download_url" = "null" ]; then
+  echo "Asset '$ASSET_NAME' not found in the latest release ($latest_tag)."
+  exit 1
+fi
+echo "Downloading $ASSET_NAME from: $download_url"
+
+# Download the asset
+curl -L -o "$ASSET_NAME" "$download_url"
+if [ $? -ne 0 ]; then
+  echo "Download failed."
+  exit 1
+fi
+
+# Create the installation directory if it does not exist
+mkdir -p "$INSTALL_DIR"
+
+# Make the downloaded asset executable
+chmod +x "$ASSET_NAME"
+
+# Move the asset to the installation directory
+mv "$ASSET_NAME" "$INSTALL_DIR/"
+if [ $? -eq 0 ]; then
+  echo "Installation successful: '$ASSET_NAME' has been moved to '$INSTALL_DIR'."
+else
+  echo "Failed to move '$ASSET_NAME' to '$INSTALL_DIR'."
+  exit 1
+fi
+
+# Unquarantine the binary (macOS specific)
+TARGET="$INSTALL_DIR/$ASSET_NAME"
+if [ -f "$TARGET" ]; then
+  echo "Removing quarantine attribute from $TARGET..."
+  xattr -dr com.apple.quarantine "$TARGET"
+  if [ $? -eq 0 ]; then
+    echo "Successfully unquarantined $TARGET."
+  else
+    echo "Failed to unquarantine $TARGET."
+    exit 1
+  fi
+else
+  echo "File not found: $TARGET"
+  exit 1
+fi
