@@ -61,3 +61,13 @@ aider-ollama() {
         echo "No model selected"
     fi
 }
+
+aider-lmstudio() {
+    local model
+    model=$(curl -s http://localhost:1234/v1/models | jq -r '.data[].id' | fzf --height 40% --reverse)
+    if [ -n "$model" ]; then
+        OPENAI_API_BASE="http://127.0.0.1:1234/v1" aider --model "openai/$model" --no-show-model-warnings
+    else
+        echo "No model selected"
+    fi
+}
