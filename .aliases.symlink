@@ -52,9 +52,21 @@ alias aider-r1='aider --model openrouter/deepseek/deepseek-r1'
 alias aider-local='OPENAI_API_BASE="http://127.0.0.1:1234/v1" aider --architect --model openai/qwen2.5-coder-7b-instruct --no-show-model-warnings'
 alias drawthings="gRPCServerCLI-macOS ~/Library/Containers/com.liuliu.draw-things/Data/Documents/Models --name mac --model-browser --no-tls"
 
+# Helper function to extract model size in billions
+get_model_size() {
+    local model_name="$1"
+    local size
+    # Extract number before 'b' or 'B', default to 0 if not found
+    size=$(echo "$model_name" | grep -o '[0-9]\+\.*[0-9]*[bB]' | grep -o '[0-9]\+\.*[0-9]*' || echo "0")
+    echo "$size"
+}
+
 aider-ollama() {
     local model
-    model=$(ollama list | tail -n +2 | awk '{print $1}' | fzf --height 40% --reverse)
+    model=$(ollama list | tail -n +2 | awk '{print $1}' | while read -r name; do
+        size=$(get_model_size "$name")
+        printf "%f %s\n" "$size" "$name"
+    done | sort -nr | cut -d' ' -f2- | fzf --height 40% --reverse)
     if [ -n "$model" ]; then
         aider --model "ollama_chat/$model" "$@"
     else
@@ -64,7 +76,10 @@ aider-ollama() {
 
 aider-lmstudio() {
     local model
-    model=$(curl -s http://localhost:1234/v1/models | jq -r '.data[].id' | fzf --height 40% --reverse)
+    model=$(curl -s http://localhost:1234/v1/models | jq -r '.data[].id' | while read -r name; do
+        size=$(get_model_size "$name")
+        printf "%f %s\n" "$size" "$name"
+    done | sort -nr | cut -d' ' -f2- | fzf --height 40% --reverse)
     if [ -n "$model" ]; then
         OPENAI_API_BASE="http://127.0.0.1:1234/v1" aider --model "openai/$model" --no-show-model-warnings "$@"
     else
