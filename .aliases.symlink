@@ -53,12 +53,6 @@ alias aider-local='OPENAI_API_BASE="http://127.0.0.1:1234/v1" aider --architect 
 alias drawthings="gRPCServerCLI-macOS ~/Library/Containers/com.liuliu.draw-things/Data/Documents/Models --name mac --model-browser --no-tls"
 
 aider-ollama() {
-    # Check if Ollama server is running
-    if ! curl -s http://127.0.0.1:11434/api/tags >/dev/null; then
-        echo "Error: Ollama server is not running. Please start it with 'ollama serve'"
-        return 1
-    fi
-
     local model
     model=$(ollama list | tail -n +2 | awk '{print $1}' | fzf --height 40% --reverse)
     if [ -n "$model" ]; then
