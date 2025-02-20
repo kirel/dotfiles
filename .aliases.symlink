@@ -49,5 +49,5 @@ alias aider='uv tool run --from aider-chat --python python3.12 aider'
 alias aider-google-free='aider --architect --watch-files --model gemini/gemini-2.0-flash-thinking-exp --editor-model gemini/gemini-exp-1206'
 alias aider-r1-free='aider --model openrouter/deepseek/deepseek-r1:free'
 alias aider-r1='aider --model openrouter/deepseek/deepseek-r1'
-
+alias aider-local='OPENAI_API_BASE="http://127.0.0.1:1234/v1" aider --architect --model openai/qwen2.5-coder-7b-instruct --no-show-model-warnings'
 alias drawthings="gRPCServerCLI-macOS ~/Library/Containers/com.liuliu.draw-things/Data/Documents/Models --name mac --model-browser --no-tls"
