@@ -56,7 +56,7 @@ aider-ollama() {
     local model
     model=$(ollama list | tail -n +2 | awk '{print $1}' | fzf --height 40% --reverse)
     if [ -n "$model" ]; then
-        OLLAMA_API_BASE="http://127.0.0.1:11434" aider --model "ollama_chat/$model"
+        aider --model "ollama_chat/$model"
     else
         echo "No model selected"
     fi
