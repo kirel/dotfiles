@@ -30,7 +30,7 @@ if [[ ! -z "${BILLIE_EMAIL}" ]]; then
     op document get id_rsa.pub > ~/.ssh/id_rsa.pub # op edit document id_rsa.pub ~/.ssh/id_rsa.pub
     op document get id_rsa > ~/.ssh/id_rsa # op edit document id_rsa ~/.ssh/id_rsa
 
-    git config --global user.email $BILLIE_EMAIL
+    ln -sf $PWD/.gitconfig.billie ~/.gitconfig.billie
 fi
 
 chmod 600 ~/.ssh/*
