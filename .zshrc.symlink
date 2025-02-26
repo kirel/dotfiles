@@ -7,6 +7,10 @@ DEFAULT_USER="danielkirsch"
 HISTSIZE=1000
 SAVEHIST=1000
 plugins=(git)
+
+# source here because it includes zsh overrides
+[[ -a ~/.billie.sh ]] && source ~/.billie.sh
+
 source $ZSH/oh-my-zsh.sh
 
 # Path
@@ -29,6 +33,8 @@ export COMPOSER_BIN="~/.composer/vendor/bin"
 export IDEA_BIN="/Applications/IntelliJ IDEA CE.app/Contents/MacOS"
 # path
 export PATH=$IDEA_BIN:$BREW_BIN:$BREW_SBIN:$NODE_BIN:$STACK_BIN:$CABAL_BIN:$HASKELL_BIN:$TEX_BIN:$HEROKU_BIN:$COMPOSER_BIN:$PATH
+export PATH="$PATH:$HOME/.cache/lm-studio/bin"
+export PATH=$PATH:${KREW_ROOT:-$HOME/.krew}/bin
 
 ## java
 export JAVA_OPTS="$JAVA_OPTS -Xms512m -Xmx1024m -XX:MaxPermSize=256m"
@@ -54,6 +60,7 @@ export RSTUDIO_WHICH_R="$BREW_BIN/R"
 
 # ollama
 export OLLAMA_HOST="http://localhost:11434"
+export OLLAMA_API_BASE="$OLLAMA_HOST"
 
 # Language version managers
 
@@ -135,12 +142,8 @@ eval "$(starship init zsh)"
 # More imports
 [[ -a ~/.aliases ]] && source ~/.aliases
 [[ -a ~/.secrets.sh ]] && source ~/.secrets.sh
-[[ -a ~/.billie.sh ]] && source ~/.billie.sh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/billie/.cache/lm-studio/bin"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
