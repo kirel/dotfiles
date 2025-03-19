@@ -85,13 +85,35 @@ aider-ollama() {
 }
 
 aider-lmstudio() {
+    local host
     local model
-    model=$(curl -s http://localhost:1234/v1/models | jq -r '.data[].id' | while read -r name; do
+    
+    # Choose host
+    echo "Select host:"
+    select host_option in "localhost" "daniels-mac.lan"; do
+        case $host_option in
+            localhost)
+                host="localhost"
+                break
+                ;;
+            daniels-mac.lan)
+                host="daniels-mac.lan"
+                break
+                ;;
+            *)
+                echo "Invalid option"
+                ;;
+        esac
+    done
+    
+    # Get models from selected host
+    model=$(curl -s "http://$host:1234/v1/models" | jq -r '.data[].id' | while read -r name; do
         size=$(get_model_size "$name")
         printf "%f %s\n" "$size" "$name"
     done | sort -nr | cut -d' ' -f2- | fzf --height 40% --reverse)
+    
     if [ -n "$model" ]; then
-        LM_STUDIO_API_KEY="dummy-api-key" LM_STUDIO_API_BASE="http://localhost:1234/v1" aider --model "lm_studio/$model" --no-show-model-warnings "$@"
+        LM_STUDIO_API_KEY="dummy-api-key" LM_STUDIO_API_BASE="http://$host:1234/v1" aider --model "lm_studio/$model" --no-show-model-warnings "$@"
     else
         echo "No model selected"
     fi
