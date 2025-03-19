@@ -16,6 +16,7 @@ alias snowsql=/Applications/SnowSQL.app/Contents/MacOS/snowsql
 alias sidetone='sox --buffer 128 -v 1 -d -d'
 alias ls=eza
 alias l="eza -lah"
+alias tf="terraform"
 
 alias brewup="brew update && brew upgrade && brew cleanup && brew autoremove && brew cu"
 alias ollup='ollama list | awk '\''NR>1 && !/reviewer/ {print "Pulling model: "$1; system("ollama pull "$1)}'\'
