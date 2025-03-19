@@ -91,7 +91,7 @@ aider-lmstudio() {
         printf "%f %s\n" "$size" "$name"
     done | sort -nr | cut -d' ' -f2- | fzf --height 40% --reverse)
     if [ -n "$model" ]; then
-        OPENAI_API_BASE="http://127.0.0.1:1234/v1" aider --model "openai/$model" --no-show-model-warnings "$@"
+        LM_STUDIO_API_KEY="dummy-api-key" LM_STUDIO_API_BASE="http://localhost:1234/v1" aider --model "lm_studio/$model" --no-show-model-warnings "$@"
     else
         echo "No model selected"
     fi
