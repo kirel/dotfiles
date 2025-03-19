@@ -87,6 +87,17 @@ aider-ollama() {
 aider-lmstudio() {
     local host
     local model
+    local editor_model
+    local args=("$@")
+    local needs_editor_model=false
+    
+    # Check if --architect is in the arguments
+    for arg in "${args[@]}"; do
+        if [[ "$arg" == "--architect" ]]; then
+            needs_editor_model=true
+            break
+        fi
+    done
     
     # Choose host
     echo "Select host:"
@@ -107,13 +118,27 @@ aider-lmstudio() {
     done
     
     # Get models from selected host
+    echo "Select main model:"
     model=$(curl -s "http://$host:1234/v1/models" | jq -r '.data[].id' | while read -r name; do
         size=$(get_model_size "$name")
         printf "%f %s\n" "$size" "$name"
     done | sort -nr | cut -d' ' -f2- | fzf --height 40% --reverse)
     
+    # If --architect is used, also select an editor model
+    if [[ "$needs_editor_model" == true ]]; then
+        echo "Select editor model:"
+        editor_model=$(curl -s "http://$host:1234/v1/models" | jq -r '.data[].id' | while read -r name; do
+            size=$(get_model_size "$name")
+            printf "%f %s\n" "$size" "$name"
+        done | sort -nr | cut -d' ' -f2- | fzf --height 40% --reverse)
+    fi
+    
     if [ -n "$model" ]; then
-        LM_STUDIO_API_KEY="dummy-api-key" LM_STUDIO_API_BASE="http://$host:1234/v1" aider --model "lm_studio/$model" --no-show-model-warnings "$@"
+        if [[ "$needs_editor_model" == true && -n "$editor_model" ]]; then
+            LM_STUDIO_API_KEY="dummy-api-key" LM_STUDIO_API_BASE="http://$host:1234/v1" aider --model "lm_studio/$model" --editor-model "lm_studio/$editor_model" --no-show-model-warnings "$@"
+        else
+            LM_STUDIO_API_KEY="dummy-api-key" LM_STUDIO_API_BASE="http://$host:1234/v1" aider --model "lm_studio/$model" --no-show-model-warnings "$@"
+        fi
     else
         echo "No model selected"
     fi
