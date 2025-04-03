@@ -37,8 +37,6 @@ export PATH="$PATH:$HOME/.cache/lm-studio/bin"
 export PATH=$PATH:${KREW_ROOT:-$HOME/.krew}/bin
 
 ## java
-export JAVA_OPTS="$JAVA_OPTS -Xms512m -Xmx1024m -XX:MaxPermSize=256m"
-export SBT_OPTS="-XX:MaxPermSize=256m"
 
 ## fix jslint
 export JS_CMD=`which node`

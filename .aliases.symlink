@@ -53,12 +53,11 @@ update_billie_secrets() {
 
 alias drawthings="gRPCServerCLI-macOS ~/Library/Containers/com.liuliu.draw-things/Data/Documents/Models --name mac --model-browser --no-tls"
 
-alias aider='uv tool run --from aider-chat --python python3.12 aider'
-alias aider-google-free='aider --architect --watch-files --model gemini/gemini-2.0-pro-exp-02-05'
-alias aider-google-thinking-free='aider --architect --watch-files --model gemini/gemini-2.0-flash-thinking-exp --editor-model gemini/gemini-2.0-pro-exp-02-05'
+alias aider='uv tool run --from aider-chat --python python3.12 aider --watch-files --notifications'
+alias aider-google-free='aider --model gemini/gemini-2.5-pro-exp-03-25'
 alias aider-r1-free='aider --model openrouter/deepseek/deepseek-r1:free'
 alias aider-r1='aider --model openrouter/deepseek/deepseek-r1'
-alias aider-local='OPENAI_API_BASE="http://127.0.0.1:1234/v1" aider --architect --model openai/qwen2.5-coder-7b-instruct --no-show-model-warnings'
+alias aider-deepseek-free='aider --architect --model openrouter/deepseek/deepseek-r1:free --editor-model openrouter/deepseek/deepseek-chat-v3-0324:free --weak-model openrouter/deepseek/deepseek-chat-v3-0324:free'
 alias aider-mistral='aider --model mistral/mistral-large-latest'
 alias aider-codestral='aider --model mistral/codestral-latest'
 
