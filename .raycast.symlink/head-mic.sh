@@ -7,6 +7,7 @@
 
 source ~/.profile
 
+# Use fixed names for headphones and mic
 switchaudiosource -s "Arctis Nova 7"
 switchaudiosource -s "Arctis Nova 7" -t system
 switchaudiosource -s "Razer Seiren Mini" -t input
