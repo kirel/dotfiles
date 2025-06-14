@@ -7,6 +7,7 @@
 
 source ~/.profile
 
+# Use fixed name for headphones
 switchaudiosource -s "Arctis Nova 7"
 switchaudiosource -s "Arctis Nova 7" -t input
 switchaudiosource -s "Arctis Nova 7" -t system
