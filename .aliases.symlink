@@ -17,6 +17,7 @@ alias sidetone='sox --buffer 128 -v 1 -d -d'
 alias ls=eza
 alias l="eza -lah"
 alias tf="terraform"
+alias lc="lumen draft | git commit -F -"
 
 alias brewup="brew update && brew upgrade && brew cleanup && brew autoremove && brew cu"
 alias ollup='ollama list | awk '\''NR>1 && !/reviewer/ {print "Pulling model: "$1; system("ollama pull "$1)}'\'
@@ -53,12 +54,13 @@ update_billie_secrets() {
 
 alias drawthings="gRPCServerCLI-macOS ~/Library/Containers/com.liuliu.draw-things/Data/Documents/Models --name mac --model-browser --no-tls"
 
-alias aider='uv tool run --from aider-chat --python python3.12 aider --chat-language en --read llm/ --watch-files --notifications'
+alias aider='uv tool run --from aider-chat --python python3.12 aider --chat-language en --watch-files'
 alias aider-sonnet='aider --model openrouter/anthropic/claude-3.7-sonnet:beta'
 alias aider-google='aider --model gemini'
-alias aider-google-flash='aider --model gemini/gemini-2.5-flash-preview-05-20'
+alias aider-google-flash='aider --model flash'
 alias aider-google-free='aider --model gemini-exp'
 alias aider-r1='aider --model openrouter/deepseek/deepseek-r1'
+alias aider-r1-free='aider --model openrouter/deepseek/deepseek-r1:free'
 alias aider-deepseek-free='aider --architect --model openrouter/deepseek/deepseek-r1:free --editor-model openrouter/deepseek/deepseek-chat-v3-0324:free --weak-model openrouter/deepseek/deepseek-chat-v3-0324:free'
 alias aider-mistral='aider --model mistral/mistral-large-latest'
 alias aider-codestral='aider --model mistral/codestral-latest'
