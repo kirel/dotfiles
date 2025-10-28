@@ -141,3 +141,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 export PATH="$PATH:/Users/billie/.cache/lm-studio/bin"
 # End of LM Studio CLI section
 
+# opencommit
+export OCO_AI_PROVIDER="gemini"
+export OCO_MODEL="gemini-2.5-flash"
+export OCO_API_KEY=$GEMINI_API_KEY
