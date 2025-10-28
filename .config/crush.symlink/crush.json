@@ -1,0 +1,22 @@
+{
+  "$schema": "https://charm.land/crush.json",
+  "providers": {
+    "litellm": {
+      "type": "openai",
+      "base_url": "https://litellm.intranet.ozean12.com",
+      "api_key": "$LITELLM_API_KEY",
+      "models": [
+        {
+          "id": "gemini/gemini-2.5-pro",
+          "name": "gemini/gemini-2.5-pro",
+          "cost_per_1m_in": 0.25,
+          "cost_per_1m_out": 1.0,
+          "cost_per_1m_in_cached": 0.07,
+          "cost_per_1m_out_cached": 1.1,
+          "context_window": 64000,
+          "default_max_tokens": 65535
+        }
+      ]
+    }
+  }
+} 
