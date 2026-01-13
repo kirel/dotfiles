@@ -19,6 +19,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 ## node
 export NODE_PATH="/usr/local/lib/node:/usr/local/lib/node_modules"
 export NODE_BIN="/usr/local/share/npm/bin"
+export NODE_EXTRA_CA_CERTS=~/.certs/root.crt
 ## haskell
 export HASKELL_BIN="$HOME/Library/Haskell/bin"
 export STACK_BIN="$HOME/.local/bin"
@@ -145,3 +146,7 @@ export PATH="$PATH:/Users/billie/.cache/lm-studio/bin"
 export OCO_AI_PROVIDER="gemini"
 export OCO_MODEL="gemini-2.5-flash"
 export OCO_API_KEY=$GEMINI_API_KEY
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/daniel/.cache/lm-studio/bin"
+# End of LM Studio CLI section
+

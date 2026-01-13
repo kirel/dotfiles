@@ -147,3 +147,36 @@ aider-lmstudio() {
         echo "No model selected"
     fi
 }
+
+claudeor() {
+    # Select model with fzf from openrouter API
+    local MODEL
+    MODEL=$(curl -s "https://openrouter.ai/api/v1/models" \
+        -H "Authorization: Bearer $OPENROUTER_API_KEY" | \
+        jq -r '.data[] | .id' | \
+        fzf --height 40% --reverse --prompt="Select OpenRouter model> ")
+
+    if [[ -z "$MODEL" ]]; then
+        echo "No model selected."
+        return 1
+    fi
+
+    # Export your required static environment variables
+    export API_TIMEOUT_MS="3000000"
+    export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
+
+    # Export all model-related variables set to the selected model
+    export ANTHROPIC_MODEL="openrouter/$MODEL"
+    export ANTHROPIC_SMALL_FAST_MODEL="openrouter/$MODEL"
+    export ANTHROPIC_DEFAULT_SONNET_MODEL="openrouter/$MODEL"
+    export ANTHROPIC_DEFAULT_OPUS_MODEL="openrouter/$MODEL"
+    export ANTHROPIC_DEFAULT_HAIKU_MODEL="openrouter/$MODEL"
+
+    export ANTHROPIC_BASE_URL="http://homelab-nuc.lan:4000"
+    export ANTHROPIC_AUTH_TOKEN="$LITELLM_API_KEY"
+
+    echo "Model set to openrouter/$MODEL"
+
+    # Optional: if you want to run claude with params given to function
+    claude "$@"
+}

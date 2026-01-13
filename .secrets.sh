@@ -6,4 +6,5 @@ export DEEPSEEK_API_KEY="{{ op://Private/cvtvyubg6wtxjhe3pjwb7z5w6e/Anmeldedaten
 export GEMINI_API_KEY="{{ op://Private/Gemini API Key/Anmeldedaten }}"
 export GOOGLE_AI_API_KEY="$GEMINI_API_KEY"
 export MINIMAX_API_KEY="{{ op://Private/Minimax/Api Key }}"
-export ANTHROPIC_AUTH_TOKEN="$MINIMAX_API_KEY"
+export LITELLM_API_KEY="{{ op://Private/Litellm-ui/Litellm Master Key }}"
+export ANTHROPIC_AUTH_TOKEN="$LITELLM_API_KEY"
