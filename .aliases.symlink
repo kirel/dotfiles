@@ -32,6 +32,11 @@ fi
 alias tf="terraform"
 alias lc="lumen draft | git commit -F -"
 
+# Homebrew
+if command -v brew &> /dev/null; then
+    alias brewup="brew update && brew upgrade && brew cleanup && brew autoremove && brew cu"
+fi
+
 # AI / Ollama tools
 alias ollup='ollama list | awk "NR>1 && !/reviewer/ {print \"Pulling model: \"$1; system(\"ollama pull \"$1)}"'
 
