@@ -1,33 +1,45 @@
-# Git
-alias vansible='ansible all -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory --private-key=~/.vagrant.d/insecure_private_key -u vagrant'
-alias vansible-playbook='ansible-playbook -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory --private-key=~/.vagrant.d/insecure_private_key -u vagrant'
+# Common Aliases (Work on macOS and Linux)
 
 alias grmm='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
-alias cat="bat --theme='Solarized (light)'"
 
-alias ping='prettyping --nolegend'
+# Use bat if available
+if command -v bat &> /dev/null; then
+    alias cat="bat --theme='Solarized (light)'"
+fi
+
+# Pretty ping if available
+if command -v prettyping &> /dev/null; then
+    alias ping='prettyping --nolegend'
+fi
+
 alias top="sudo htop"
-alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+
+# ncdu
+if command -v ncdu &> /dev/null; then
+    alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+fi
 
 alias r="radian"
 
-alias snowsql=/Applications/SnowSQL.app/Contents/MacOS/snowsql
+# eza / ls
+if command -v eza &> /dev/null; then
+    alias ls=eza
+    alias l="eza -lah"
+else
+    alias l="ls -lah"
+fi
 
-alias sidetone='sox --buffer 128 -v 1 -d -d'
-alias ls=eza
-alias l="eza -lah"
 alias tf="terraform"
 alias lc="lumen draft | git commit -F -"
 
-alias brewup="brew update && brew upgrade && brew cleanup && brew autoremove && brew cu"
-alias ollup='ollama list | awk '\''NR>1 && !/reviewer/ {print "Pulling model: "$1; system("ollama pull "$1)}'\'
-
+# AI / Ollama tools
+alias ollup='ollama list | awk "NR>1 && !/reviewer/ {print \"Pulling model: \"$1; system(\"ollama pull \"$1)}"'
 
 function op2env() {
     input_file="${1:-.env.example}"
     while IFS= read -r line || [[ -n "$line" ]]; do
         key="$(echo "$line" | awk -F "=" '{print $1}')"
-        echo "${key}=\${${key}}"
+        echo "${key}=\"{${key}}\""
     done < "$input_file" | op run --no-masking --env-file="$input_file" -- envsubst > .env
 }
 
@@ -52,8 +64,7 @@ update_billie_secrets() {
     op inject -fi ~/.dotfiles/.secrets.billie.sh -o ~/.secrets.billie.sh && cat ~/.secrets.billie.sh
 }
 
-alias drawthings="gRPCServerCLI-macOS ~/Library/Containers/com.liuliu.draw-things/Data/Documents/Models --name mac --model-browser --no-tls"
-
+# Aider Aliases
 alias aider='uv tool run --from aider-chat --python python3.12 aider --chat-language en --watch-files'
 alias aider-sonnet='aider --model openrouter/anthropic/claude-3.7-sonnet:beta'
 alias aider-google='aider --model gemini'
@@ -75,6 +86,8 @@ get_model_size() {
     echo "$size"
 }
 
+
+
 aider-ollama() {
     local model
     model=$(ollama list | tail -n +2 | awk '{print $1}' | while read -r name; do
@@ -92,7 +105,7 @@ aider-lmstudio() {
     local host
     local model
     local editor_model
-    local args=("$@")
+    local args=($@)
     local needs_editor_model=false
     
     # Check if --architect is in the arguments
@@ -107,14 +120,14 @@ aider-lmstudio() {
     echo "Select host:"
     select host_option in "localhost" "daniels-mac.lan"; do
         case $host_option in
-            localhost)
+            localhost) 
                 host="localhost"
                 break
-                ;;
+                ;; 
             daniels-mac.lan)
                 host="daniels-mac.lan"
                 break
-                ;;
+                ;; 
             *)
                 echo "Invalid option"
                 ;;
