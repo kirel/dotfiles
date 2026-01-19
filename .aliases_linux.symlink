@@ -1,0 +1,5 @@
+# Linux specific aliases
+
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+alias update='sudo apt update && sudo apt upgrade -y'

@@ -1,0 +1,46 @@
+# macOS specific ZSH configuration
+
+# Path
+## brew
+if [[ -f /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -f /usr/local/bin/brew ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+## node
+export NODE_PATH="/usr/local/lib/node:/usr/local/lib/node_modules"
+export NODE_BIN="/usr/local/share/npm/bin"
+
+## haskell
+export HASKELL_BIN="$HOME/Library/Haskell/bin"
+
+## latex
+export TEX_BIN="/Library/TeX/texbin"
+
+# idea
+export IDEA_BIN="/Applications/IntelliJ IDEA CE.app/Contents/MacOS"
+
+# Update PATH
+export PATH=$IDEA_BIN:$NODE_BIN:$HASKELL_BIN:$TEX_BIN:$PATH
+
+## Android
+export ANDROID_HOME=/usr/local/opt/android-sdk
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+# R
+export RSTUDIO_WHICH_R="$BREW_BIN/R"
+
+# rbenv macOS specific
+if [[ -n "$BREW_BIN" ]]; then
+  export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$($BREW_BIN/brew --prefix openssl@1.1)"
+fi
+
+# iTerm2 integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# 1Password SSH Agent
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BU86482C3.com.1password/t/agent.sock
+
+# Sourcing macOS aliases if they exist
+[[ -f ~/.aliases_macos ]] && source ~/.aliases_macos

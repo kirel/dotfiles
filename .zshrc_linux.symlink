@@ -1,0 +1,10 @@
+# Linux specific ZSH configuration
+
+# Common Linux paths
+export PATH="$HOME/.local/bin:$PATH"
+
+# 1Password SSH Agent
+export SSH_AUTH_SOCK=~/.1password/agent.sock
+
+# Sourcing Linux aliases if they exist
+[[ -f ~/.aliases_linux ]] && source ~/.aliases_linux

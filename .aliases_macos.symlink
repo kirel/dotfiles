@@ -1,0 +1,9 @@
+# macOS specific aliases
+
+alias snowsql=/Applications/SnowSQL.app/Contents/MacOS/snowsql
+alias sidetone='sox --buffer 128 -v 1 -d -d'
+alias brewup="brew update && brew upgrade && brew cleanup && brew autoremove && brew cu"
+alias drawthings="gRPCServerCLI-macOS ~/Library/Containers/com.liuliu.draw-things/Data/Documents/Models --name mac --model-browser --no-tls"
+
+# Raycast scripts are typically macOS only
+# (The directory is already symlinked, but here you could add aliases if needed)
