@@ -1,46 +1,105 @@
+#!/bin/bash
+set -e
 
-set -x
+# Detect OS
+OS_TYPE="$(uname)"
 
-brew install -f --cask \
-    1password \
-    1password-cli
+install_1password() {
+    if [[ "$OS_TYPE" == "Darwin" ]]; then
+        if ! command -v brew &> /dev/null; then
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        fi
+        brew install --cask 1password 1password-cli
+    elif [[ "$OS_TYPE" == "Linux" ]]; then
+        # Check for Debian/Ubuntu
+        if command -v apt-get &> /dev/null; then
+            curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
+            echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/amd64 stable main' | sudo tee /etc/apt/sources.list.d/1password.list
+            sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/
+            curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
+            sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22/
+            curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
+            sudo apt-get update && sudo apt-get install 1password-cli
+        fi
+    fi
+}
+
+# Ensure 1Password CLI is installed for secrets
+if ! command -v op &> /dev/null; then
+    install_1password
+fi
 
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
 touch ~/.ssh/authorized_keys
 
-read -p "Email : " EMAIL
+read -p "Email (leave empty to skip secrets) : " EMAIL
 
 if [[ ! -z "${EMAIL}" ]]; then
     # my secrets
     eval $(op signin --account my)
-    op document get id_rsa_private.pub > ~/.ssh/id_rsa.pub # op edit document id_rsa_private.pub ~/.ssh/id_rsa_private.pub
-    op document get id_rsa_private > ~/.ssh/id_rsa # op edit document id_rsa_private ~/.ssh/id_rsa_private
     op inject -i .secrets.sh -o ~/.secrets.sh
 
-    git config --global user.email $EMAIL
+    git config --global user.email "$EMAIL"
 fi
 
-read -p "Billie email : " BILLIE_EMAIL
+read -p "Billie email (leave empty to skip) : " BILLIE_EMAIL
 
 if [[ ! -z "${BILLIE_EMAIL}" ]]; then
     # Billie 1password account
-    eval $(op signin --account billie_team)
-    op document get .billie.sh > ~/.billie.sh # op edit document .billie.sh ~/.billie.sh
-    op document get id_rsa.pub > ~/.ssh/id_rsa.pub # op edit document id_rsa.pub ~/.ssh/id_rsa.pub
-    op document get id_rsa > ~/.ssh/id_rsa # op edit document id_rsa ~/.ssh/id_rsa
+    eval $(op signin --account billie-team)
+    op document get .billie.sh > ~/.billie.sh 
 
-    ln -sf $PWD/.gitconfig.billie ~/.gitconfig.billie
+    ln -sf "$PWD/.gitconfig.billie" ~/.gitconfig.billie
 fi
 
 chmod 600 ~/.ssh/*
 chmod 644 ~/.ssh/*.pub
 
-# zsh
-brew install zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# This repo
-[ ! -d "~/.dotfiles" ] && git clone git@github.com:kirel/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles && rake && brew bundle -v && cd -
+# ZSH Installation
+if ! command -v zsh &> /dev/null; then
+    if [[ "$OS_TYPE" == "Darwin" ]]; then
+        brew install zsh
+    elif [[ "$OS_TYPE" == "Linux" ]]; then
+        sudo apt-get update && sudo apt-get install -y zsh
+    fi
+fi
 
+# Oh My Zsh
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
 
+# Clone this repo if not already here (though we are likely running from it)
+DOTFILES_DIR="$HOME/.dotfiles"
+if [ ! -d "$DOTFILES_DIR" ]; then
+    git clone git@github.com:kirel/dotfiles.git "$DOTFILES_DIR"
+fi
+
+# Symlinking via Rake
+cd "$DOTFILES_DIR"
+if command -v rake &> /dev/null; then
+    rake
+else
+    # Install rake if missing
+    if [[ "$OS_TYPE" == "Darwin" ]]; then
+        brew install ruby
+    else
+        sudo apt-get install -y rake
+    fi
+    rake
+fi
+
+# Install packages
+if [[ "$OS_TYPE" == "Darwin" ]]; then
+    brew bundle -v
+else
+    # On Linux, brew bundle might still work if Homebrew is installed, 
+    # but we might want to skip casks or use a different Brewfile
+    if command -v brew &> /dev/null; then
+        brew bundle -v || true
+    fi
+fi
+
+cd -
+echo "Setup complete! Please restart your shell."
