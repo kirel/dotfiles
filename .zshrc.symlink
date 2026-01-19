@@ -13,60 +13,28 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-# Path
-## brew
-eval "$(/opt/homebrew/bin/brew shellenv)"
-## node
-export NODE_PATH="/usr/local/lib/node:/usr/local/lib/node_modules"
-export NODE_BIN="/usr/local/share/npm/bin"
-export NODE_EXTRA_CA_CERTS=~/.certs/root.crt
-## haskell
-export HASKELL_BIN="$HOME/Library/Haskell/bin"
+# Detect OS
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    export IS_MACOS=1
+    [[ -f ~/.zshrc_macos ]] && source ~/.zshrc_macos
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    export IS_LINUX=1
+    [[ -f ~/.zshrc_linux ]] && source ~/.zshrc_linux
+fi
+
+# Generic Path additions
 export STACK_BIN="$HOME/.local/bin"
 export CABAL_BIN=~/.cabal/bin
-## latex
-export TEX_BIN="/Library/TeX/texbin"
-# Heroku Toolbelt
-export HEROKU_BIN="/usr/local/heroku/bin"
-## php
 export COMPOSER_BIN="~/.composer/vendor/bin"
-# idea
-export IDEA_BIN="/Applications/IntelliJ IDEA CE.app/Contents/MacOS"
-# path
-export PATH=$IDEA_BIN:$BREW_BIN:$BREW_SBIN:$NODE_BIN:$STACK_BIN:$CABAL_BIN:$HASKELL_BIN:$TEX_BIN:$HEROKU_BIN:$COMPOSER_BIN:$PATH
-export PATH="$PATH:$HOME/.cache/lm-studio/bin"
-export PATH=$PATH:${KREW_ROOT:-$HOME/.krew}/bin
+export KREW_BIN="${KREW_ROOT:-$HOME/.krew}/bin"
 
-## java
-
-## fix jslint
-export JS_CMD=`which node`
-
-## Android
-export ANDROID_HOME=/usr/local/opt/android-sdk
-
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-
-# Python virtualenv/pipenv
-export PIP_RESPECT_VIRTUALENV=true
-#export PIP_REQUIRE_VIRTUALENV=true
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-#export PIPENV_VENV_IN_PROJECT=1
-export SYSTEM_VERSION_COMPAT=0
-
-# R
-export RSTUDIO_WHICH_R="$BREW_BIN/R"
-
-# ollama
-export OLLAMA_HOST="http://localhost:11434"
-export OLLAMA_API_BASE="$OLLAMA_HOST"
+export PATH=$STACK_BIN:$CABAL_BIN:$COMPOSER_BIN:$KREW_BIN:$PATH
 
 # Language version managers
 
 # rbenv
 load_rbenv () {
-  if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-  export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$($BREW_BIN/brew --prefix openssl@1.1)"
+  if command -v rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 }
 
 # nvm
@@ -75,78 +43,79 @@ load_nvm () {
     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 }
 
-# Other tools
+# Common tools detection and initialization
+# (We check if the command exists before trying to eval/source)
 
+# hub
 if command -v hub &> /dev/null; then
   eval "$(hub alias -s)"
-else
-  echo "Warning: hub is not installed or not in PATH."
 fi
-[[ -f $(brew --prefix)/etc/profile.d/z.sh ]] && . $(brew --prefix)/etc/profile.d/z.sh
+
+# z (if available via brew or manual install)
+if [[ -n $IS_MACOS ]] && command -v brew &> /dev/null; then
+    [[ -f $(brew --prefix)/etc/profile.d/z.sh ]] && . $(brew --prefix)/etc/profile.d/z.sh
+elif [[ -f /usr/share/z/z.sh ]]; then
+    . /usr/share/z/z.sh
+fi
 
 # direnv
 if command -v direnv &> /dev/null; then
   eval "$(direnv hook zsh)"
-else
-  echo "Warning: direnv is not installed or not in PATH."
 fi
 
 # fzf
 if command -v fzf &> /dev/null; then
   source <(fzf --zsh)
-else
-  echo "Warning: fzf is not installed or not in PATH."
 fi
 
+# zoxide
 if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh)"
-else
-  echo "Warning: zoxide is not installed or not in PATH."
 fi
 
-# Add the thefuck alias evaluation if it's installed
+# thefuck
 if command -v thefuck &> /dev/null; then
   eval $(thefuck --alias)
-else
-  echo "Warning: thefuck is not installed or not in PATH."
 fi
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='code -w'
+  if command -v code &> /dev/null; then
+    export EDITOR='code -w'
+  else
+    export EDITOR='vim'
+  fi
 fi
 export SVN_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Syntax highlighting & suggestions (load only if they exist)
+if [[ -n $IS_MACOS ]] && command -v brew &> /dev/null; then
+    [[ -f $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    [[ -f $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [[ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 # Prompt
-eval "$(starship init zsh)"
+if command -v starship &> /dev/null; then
+  eval "$(starship init zsh)"
+fi
 
 # More imports
 [[ -a ~/.aliases ]] && source ~/.aliases
 [[ -a ~/.secrets.sh ]] && source ~/.secrets.sh
-[[ -a ~/.billie.sh ]] && source ~/.billie.sh # source again!
+[[ -a ~/.billie.sh ]] && source ~/.billie.sh # source again if needed
 [[ -a ~/.secrets.billie.sh ]] && source ~/.secrets.billie.sh
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# SDKMAN
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/billie/.cache/lm-studio/bin"
-# End of LM Studio CLI section
-
-# opencommit
+# Opencommit
 export OCO_AI_PROVIDER="gemini"
 export OCO_MODEL="gemini-2.5-flash"
 export OCO_API_KEY=$GEMINI_API_KEY
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/daniel/.cache/lm-studio/bin"
-# End of LM Studio CLI section
-
