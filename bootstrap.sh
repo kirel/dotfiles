@@ -48,57 +48,21 @@ if ! command -v op &> /dev/null; then
     install_1password
 fi
 
-echo "==> Preparing SSH directory..."
-mkdir -p ~/.ssh
-chmod 700 ~/.ssh
-touch ~/.ssh/authorized_keys
-
-echo "==> Configuring personal identity and secrets..."
-read -p "Email (leave empty to skip secrets) : " EMAIL
-
-if [[ ! -z "${EMAIL}" ]]; then
-    echo "    Fetching personal secrets from 1Password..."
-    # my secrets
-    eval $(op signin --account my)
-    op inject -i .secrets.sh -o ~/.secrets.sh
-
-    echo "    Setting global Git email..."
-    git config --global user.email "$EMAIL"
+# Ensure Git is installed (needed for cloning)
+if ! command -v git &> /dev/null; then
+    echo "==> Installing Git..."
+    if [[ "$OS_TYPE" == "Darwin" ]]; then
+        brew install git
+    else
+        sudo apt-get update && sudo apt-get install -y git
+    fi
 fi
 
-echo "==> Configuring optional work environment..."
-# Load existing work config if available for defaults
-if [[ -f ~/.work.sh ]]; then
-    source ~/.work.sh
-fi
-
-read -p "Work email [${WORK_EMAIL}] (leave empty to skip) : " INPUT_WORK_EMAIL
-WORK_EMAIL=${INPUT_WORK_EMAIL:-$WORK_EMAIL}
-
-if [[ ! -z "${WORK_EMAIL}" ]]; then
-    read -p "Work 1Password account ID [${OP_ACCOUNT}] : " INPUT_OP_ACCOUNT
-    OP_ACCOUNT=${INPUT_OP_ACCOUNT:-$OP_ACCOUNT}
-
-    echo "    Fetching work overrides and secrets..."
-    # Work 1password account
-    eval $(op signin --account "${OP_ACCOUNT}")
-    op inject -i .secrets.work.sh -o ~/.secrets.work.sh
-
-    # Overwrite/Create the local cache with current values
-    echo "export WORK_EMAIL=\"${WORK_EMAIL}\"" > ~/.work.sh
-    echo "export OP_ACCOUNT=\"${OP_ACCOUNT}\"" >> ~/.work.sh
-    echo "[[ -f ~/.aliases.work ]] && source ~/.aliases.work" >> ~/.work.sh
-
-    echo "    Linking work-specific Git config..."
-    ln -sf "$PWD/.gitconfig.work" ~/.gitconfig.work
-fi
-
-echo "==> Finalizing SSH permissions..."
-if ls ~/.ssh/* >/dev/null 2>&1; then
-    chmod 600 ~/.ssh/*
-fi
-if ls ~/.ssh/*.pub >/dev/null 2>&1; then
-    chmod 644 ~/.ssh/*.pub
+# Clone this repo if not already here
+DOTFILES_DIR="$HOME/.dotfiles"
+if [ ! -d "$DOTFILES_DIR" ]; then
+    echo "==> Cloning dotfiles repository to $DOTFILES_DIR..."
+    git clone git@github.com:kirel/dotfiles.git "$DOTFILES_DIR"
 fi
 
 # ZSH Installation
@@ -118,13 +82,6 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
-# Clone this repo if not already here (though we are likely running from it)
-DOTFILES_DIR="$HOME/.dotfiles"
-if [ ! -d "$DOTFILES_DIR" ]; then
-    echo "==> Cloning dotfiles repository to $DOTFILES_DIR..."
-    git clone git@github.com:kirel/dotfiles.git "$DOTFILES_DIR"
-fi
-
 # Symlinking via Rake
 echo "==> Creating symlinks via Rake..."
 cd "$DOTFILES_DIR"
@@ -132,13 +89,64 @@ if command -v rake &> /dev/null; then
     rake
 else
     echo "    Rake not found. Installing Ruby/Rake..."
-    # Install rake if missing
     if [[ "$OS_TYPE" == "Darwin" ]]; then
         brew install ruby
     else
         sudo apt-get install -y rake
     fi
     rake
+fi
+
+echo "==> Configuring personal identity and secrets..."
+read -p "Email (leave empty to skip secrets) : " EMAIL
+
+if [[ ! -z "${EMAIL}" ]]; then
+    echo "    Fetching personal secrets from 1Password..."
+    # my secrets
+    eval $(op signin --account my)
+    op inject -fi "$DOTFILES_DIR/.secrets.sh" -o ~/.secrets.sh && cat ~/.secrets.sh
+
+    echo "    Setting global Git email..."
+    git config --global user.email "$EMAIL"
+fi
+
+echo "==> Configuring optional work environment..."
+# Load existing work config if available for defaults
+if [[ -f ~/.work.sh ]]; then
+    source ~/.work.sh
+fi
+
+read -p "Work email [${WORK_EMAIL}] (leave empty to skip) : " INPUT_WORK_EMAIL
+WORK_EMAIL=${INPUT_WORK_EMAIL:-$WORK_EMAIL}
+
+if [[ ! -z "${WORK_EMAIL}" ]]; then
+    read -p "Work 1Password account ID [${OP_ACCOUNT}] : " INPUT_OP_ACCOUNT
+    OP_ACCOUNT=${INPUT_OP_ACCOUNT:-$OP_ACCOUNT}
+
+    echo "    Fetching work overrides and secrets..."
+    eval $(op signin --account "${OP_ACCOUNT}")
+    op inject -fi "$DOTFILES_DIR/.secrets.work.sh" -o ~/.secrets.work.sh && cat ~/.secrets.work.sh
+
+    # Overwrite/Create the local cache with current values
+    echo "export WORK_EMAIL=\"${WORK_EMAIL}\"" > ~/.work.sh
+    echo "export OP_ACCOUNT=\"${OP_ACCOUNT}\"" >> ~/.work.sh
+    echo "[[ -f ~/.aliases.work ]] && source ~/.aliases.work" >> ~/.work.sh
+
+    echo "    Linking work-specific Git config..."
+    ln -sf "$DOTFILES_DIR/.gitconfig.work" ~/.gitconfig.work
+fi
+
+echo "==> Preparing SSH directory..."
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+touch ~/.ssh/authorized_keys
+
+echo "==> Finalizing SSH permissions..."
+if ls ~/.ssh/* >/dev/null 2>&1; then
+    chmod 600 ~/.ssh/*
+fi
+if ls ~/.ssh/*.pub >/dev/null 2>&1; then
+    chmod 644 ~/.ssh/*.pub
 fi
 
 # Install packages
@@ -152,13 +160,10 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         echo "==> Work machine detected. Skipping personal MAS apps."
     fi
 else
-    # On Linux, brew bundle might still work if Homebrew is installed, 
-    # but we might want to skip casks or use a different Brewfile
     if command -v brew &> /dev/null; then
         echo "==> Installing Homebrew packages for Linux..."
         brew bundle -v || true
     fi
 fi
 
-cd -
 echo "Setup complete! Please restart your shell."
