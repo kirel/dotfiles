@@ -24,13 +24,10 @@ brew "jenv"
 brew "jid"
 brew "jq"
 brew "mariadb-connector-c"
-brew "mas"
 brew "ncdu"
 brew "neovim"
 brew "nmap"
 brew "node"
-brew "ollama", restart_service: true
-brew "pipenv"
 brew "prettyping"
 brew "pyenv"
 brew "ruby-build"
@@ -114,25 +111,7 @@ cask "webpquicklook"
 cask "whatsapp"
 cask "wireshark"
 cask "zoom"
-mas "1Password for Safari", id: 1569813296
-mas "Amphetamine", id: 937984704
-mas "Cardhop", id: 1290358394
-mas "Draw Things", id: 6444050820
-mas "Enchanted", id: 6474268307
-mas "Keynote", id: 409183694
-mas "Lieferungen", id: 290986013
-mas "MoneyMoney", id: 872698314
-mas "Monosnap", id: 540348655
-mas "Notability", id: 360593530
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
-mas "Passepartout", id: 1433648537
-mas "Playgrounds", id: 1496833156
-mas "Pocket", id: 568494494
-mas "PopClip", id: 445189367
-mas "Save to Pocket", id: 1477385213
-mas "Todoist", id: 585829637
-mas "Xcode", id: 497799835
+
 vscode "bierner.markdown-mermaid"
 vscode "bluebrown.yamlfmt"
 vscode "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
@@ -181,12 +160,6 @@ vscode "tamasfe.even-better-toml"
 vscode "tomoki1207.pdf"
 vscode "visualstudioexptteam.intellicode-api-usage-examples"
 vscode "visualstudioexptteam.vscodeintellicode"
-vscode "vscjava.vscode-gradle"
-vscode "vscjava.vscode-java-debug"
-vscode "vscjava.vscode-java-dependency"
-vscode "vscjava.vscode-java-pack"
-vscode "vscjava.vscode-java-test"
-vscode "vscjava.vscode-maven"
 vscode "vscodevim.vim"
 vscode "vstirbu.vscode-mermaid-preview"
 vscode "zainchen.json"

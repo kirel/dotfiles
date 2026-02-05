@@ -43,14 +43,18 @@ if [[ ! -z "${EMAIL}" ]]; then
     git config --global user.email "$EMAIL"
 fi
 
-read -p "Billie email (leave empty to skip) : " BILLIE_EMAIL
+read -p "Work email (leave empty to skip) : " WORK_EMAIL
 
-if [[ ! -z "${BILLIE_EMAIL}" ]]; then
-    # Billie 1password account
-    eval $(op signin --account billie-team)
-    op document get .billie.sh > ~/.billie.sh 
+if [[ ! -z "${WORK_EMAIL}" ]]; then
+    read -p "Work 1Password account ID : " WORK_OP_ACCOUNT
+    # Work 1password account
+    eval $(op signin --account "${WORK_OP_ACCOUNT}")
+    op document get .work.sh > ~/.work.sh 
 
-    ln -sf "$PWD/.gitconfig.billie" ~/.gitconfig.billie
+    # Persist the account ID for future op signin calls (e.g. in aliases)
+    echo "export WORK_OP_ACCOUNT=\"${WORK_OP_ACCOUNT}\"" >> ~/.work.sh
+
+    ln -sf "$PWD/.gitconfig.work" ~/.gitconfig.work
 fi
 
 chmod 600 ~/.ssh/*
@@ -93,6 +97,9 @@ fi
 # Install packages
 if [[ "$OS_TYPE" == "Darwin" ]]; then
     brew bundle -v
+    if [ ! -f ~/.work.sh ]; then
+        brew bundle --file=Brewfile.mas -v
+    fi
 else
     # On Linux, brew bundle might still work if Homebrew is installed, 
     # but we might want to skip casks or use a different Brewfile

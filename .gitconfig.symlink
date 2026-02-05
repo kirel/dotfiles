@@ -29,4 +29,4 @@
     file-decoration-style = none
 
 [include]
-	path = ~/.gitconfig.billie
+   path = ~/.gitconfig.work

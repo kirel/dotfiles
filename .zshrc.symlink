@@ -9,7 +9,7 @@ SAVEHIST=1000
 plugins=(git)
 
 # source here because it includes zsh overrides
-[[ -a ~/.billie.sh ]] && source ~/.billie.sh
+[[ -a ~/.work.sh ]] && source ~/.work.sh
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,8 +108,8 @@ fi
 # More imports
 [[ -a ~/.aliases ]] && source ~/.aliases
 [[ -a ~/.secrets.sh ]] && source ~/.secrets.sh
-[[ -a ~/.billie.sh ]] && source ~/.billie.sh # source again if needed
-[[ -a ~/.secrets.billie.sh ]] && source ~/.secrets.billie.sh
+[[ -a ~/.work.sh ]] && source ~/.work.sh # source again if needed
+[[ -a ~/.secrets.work.sh ]] && source ~/.secrets.work.sh
 
 # SDKMAN
 export SDKMAN_DIR="$HOME/.sdkman"

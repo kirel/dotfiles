@@ -64,9 +64,9 @@ update_secrets() {
     op inject -fi ~/.dotfiles/.secrets.sh -o ~/.secrets.sh && cat ~/.secrets.sh
 }
 
-update_billie_secrets() {
-    op signin --account billie-team
-    op inject -fi ~/.dotfiles/.secrets.billie.sh -o ~/.secrets.billie.sh && cat ~/.secrets.billie.sh
+update_work_secrets() {
+    op signin --account "${WORK_OP_ACCOUNT:-work}"
+    op inject -fi ~/.dotfiles/.secrets.work.sh -o ~/.secrets.work.sh && cat ~/.secrets.work.sh
 }
 
 # Aider Aliases
@@ -80,7 +80,7 @@ alias aider-r1-free='aider --model openrouter/deepseek/deepseek-r1:free'
 alias aider-deepseek-free='aider --architect --model openrouter/deepseek/deepseek-r1:free --editor-model openrouter/deepseek/deepseek-chat-v3-0324:free --weak-model openrouter/deepseek/deepseek-chat-v3-0324:free'
 alias aider-mistral='aider --model mistral/mistral-large-latest'
 alias aider-codestral='aider --model mistral/codestral-latest'
-alias aider-billie='aider --model openai/gemini-2.5-pro'
+alias aider-work='aider --model openai/gemini-2.5-pro'
 
 # Helper function to extract model size in billions
 get_model_size() {

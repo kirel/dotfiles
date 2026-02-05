@@ -5,7 +5,7 @@ OS_TYPE = `uname`.strip
 LINUX_SKIP = [
   '.raycast',
   '.config/crush',
-  '.gitconfig.billie' # Usually only for my work mac
+  '.gitconfig.work' # Usually only for my work mac
 ]
 
 task :symlink do

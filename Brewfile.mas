@@ -1,0 +1,21 @@
+brew "mas"
+
+mas "1Password for Safari", id: 1569813296
+mas "Amphetamine", id: 937984704
+mas "Cardhop", id: 1290358394
+mas "Draw Things", id: 6444050820
+mas "Enchanted", id: 6474268307
+mas "Keynote", id: 409183694
+mas "Lieferungen", id: 290986013
+mas "MoneyMoney", id: 872698314
+mas "Monosnap", id: 540348655
+mas "Notability", id: 360593530
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Passepartout", id: 1433648537
+mas "Playgrounds", id: 1496833156
+mas "Pocket", id: 568494494
+mas "PopClip", id: 445189367
+mas "Save to Pocket", id: 1477385213
+mas "Todoist", id: 585829637
+mas "Xcode", id: 497799835
