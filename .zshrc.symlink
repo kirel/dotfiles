@@ -16,10 +16,10 @@ source $ZSH/oh-my-zsh.sh
 # Detect OS
 if [[ "$OSTYPE" == "darwin"* ]]; then
     export IS_MACOS=1
-    [[ -f ~/.zshrc_macos ]] && source ~/.zshrc_macos
+    [[ -f ~/.zshrc.macos ]] && source ~/.zshrc.macos
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     export IS_LINUX=1
-    [[ -f ~/.zshrc_linux ]] && source ~/.zshrc_linux
+    [[ -f ~/.zshrc.linux ]] && source ~/.zshrc.linux
 fi
 
 # Generic Path additions

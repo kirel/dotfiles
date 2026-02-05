@@ -7,4 +7,4 @@ export PATH="$HOME/.local/bin:$PATH"
 export SSH_AUTH_SOCK=~/.1password/agent.sock
 
 # Sourcing Linux aliases if they exist
-[[ -f ~/.aliases_linux ]] && source ~/.aliases_linux
+[[ -f ~/.aliases.linux ]] && source ~/.aliases.linux
