@@ -10,9 +10,9 @@ or
 
     rake dump
 
-## Install MAS
+## Install Personal / MAS Apps
 
-    brew bundle --file=Brewfile.mas
+    brew bundle --file=Brewfile.personal
 
 ## Cleanup
 

@@ -133,4 +133,10 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     fi
 fi
 
-echo "Setup complete! Please restart your shell."
+echo ""
+echo "################################################################################"
+echo "  🎉 Bootstrap completed successfully!"
+echo "################################################################################"
+echo ""
+echo "Please restart your shell or run 'source ~/.zshrc' to apply changes."
+echo ""

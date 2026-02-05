@@ -21,8 +21,9 @@ The primary way to set up the environment is by running the `bootstrap.sh` scrip
 5.  Install Zsh and Oh My Zsh.
 6.  Clone this dotfiles repository to `~/.dotfiles`.
 7.  Run `rake` to create symlinks for all the configuration files.
-8.  Run `brew bundle` to install all the packages, casks, and VS Code extensions listed in the `Brewfile`.
-9.  Install personal Mac App Store apps via `Brewfile.mas` (automatically skipped if a work environment is detected).
+8.  Run `brew bundle` to install all the baseline packages and casks.
+9.  Install personal "Play" packages and Mac App Store apps via `Brewfile.personal` (skipped if a work environment is detected).
+10. Install work-specific packages via `Brewfile.work` (if a work environment is detected).
 
 ## Commands
 
@@ -31,12 +32,17 @@ The primary way to set up the environment is by running the `bootstrap.sh` scrip
     sh ./bootstrap.sh
     ```
 
-*   **Install MAS Apps:** To manually install personal Mac App Store apps:
+*   **Install Personal Apps:** To manually install personal packages and MAS apps:
     ```bash
-    brew bundle --file=Brewfile.mas
+    brew bundle --file=Brewfile.personal
     ```
 
-*   **Update Brewfile:** To update both `Brewfile` and `Brewfile.mas` with currently installed packages:
+*   **Install Work Apps:** To manually install work-specific packages:
+    ```bash
+    brew bundle --file=Brewfile.work
+    ```
+
+*   **Update Brewfiles:** To update `Brewfile`, `Brewfile.personal`, and `Brewfile.work` with currently installed packages:
     ```bash
     rake dump
     ```
@@ -54,6 +60,6 @@ The primary way to set up the environment is by running the `bootstrap.sh` scrip
 # Development Conventions
 
 *   **Symlinking:** Configuration files in this repository have a `.symlink` extension. The `Rakefile` contains a task that creates symbolic links from this repository to the corresponding dotfile in the user's home directory (e.g., `.zshrc.symlink` -> `~/.zshrc`).
-*   **Package Management:** The `Brewfile` is the primary source of truth for command-line tools, GUI applications (casks), and VS Code extensions (`vscode`). Mac App Store apps (`mas`) are managed separately in `Brewfile.mas` to allow skipping them in environments where the App Store is restricted.
+*   **Package Management:** The `Brewfile` is the primary source of truth for command-line tools and GUI applications (casks). Personal packages and Mac App Store apps (`mas`) are managed separately in `Brewfile.personal` to allow skipping them in work environments. Work-specific packages are in `Brewfile.work`.
 *   **Secrets:** Secrets are not stored in the repository. They are managed in 1Password and sourced into the shell environment by the `bootstrap.sh` script, creating files like `~/.secrets.sh` and `~/.work.sh`.
 *   **Modularity:** Shell configuration is broken down into multiple files. The main entry point is `.zshrc.symlink`, which sources other files like `.aliases.symlink`, secret files, and work-specific overrides.
