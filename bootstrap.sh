@@ -44,7 +44,15 @@ install_1password() {
 }
 
 # 1. Mandatory Personal 1Password Setup
-if ! command -v op &> /dev/null; then install_1password; fi
+if ! command -v op &> /dev/null; then
+    install_1password
+    echo "==> ACTION REQUIRED: 1Password Setup"
+    echo "    1. Open 1Password"
+    echo "    2. Go to Settings -> Developer"
+    echo "    3. Enable 'CLI' integration"
+    echo "    4. Enable 'SSH Agent'"
+    read -p "    Press [Enter] after you have enabled these settings to continue..."
+fi
 
 echo "==> Authenticating with Personal 1Password (needed for SSH keys)..."
 eval $(op signin --account my)
