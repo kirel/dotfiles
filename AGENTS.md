@@ -36,9 +36,9 @@ The primary way to set up the environment is by running the `bootstrap.sh` scrip
     brew bundle --file=Brewfile.mas
     ```
 
-*   **Update Brewfile:** To update the `Brewfile` with currently installed packages:
+*   **Update Brewfile:** To update both `Brewfile` and `Brewfile.mas` with currently installed packages:
     ```bash
-    brew bundle dump -f
+    rake dump
     ```
 
 *   **Cleanup Unlisted Brew Packages:** To remove any packages not listed in the `Brewfile`:

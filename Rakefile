@@ -30,5 +30,22 @@ task :symlink do
   end
 end
 
+task :dump do
+  puts "Dumping Brewfiles..."
+  tmp = "Brewfile.tmp"
+  # Use sh to execute the shell command
+  sh "brew bundle dump --force --file=#{tmp}"
+  
+  # Extract MAS entries and the mas CLI to Brewfile.mas
+  # We use grep to filter lines. '^mas ' matches MAS apps, '^brew "mas"' matches the mas tool itself.
+  sh "grep -E '^mas |^brew \"mas\"' #{tmp} > Brewfile.mas"
+  
+  # Put everything else into the main Brewfile
+  sh "grep -vE '^mas |^brew \"mas\"' #{tmp} > Brewfile"
+  
+  rm tmp
+  puts "Done! Split into Brewfile and Brewfile.mas"
+end
+
 task :default => :symlink
 

@@ -8,7 +8,7 @@ or
 
 ## Update
 
-    brew bundle dump -f
+    rake dump
 
 ## Install MAS
 
