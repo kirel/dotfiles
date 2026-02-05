@@ -67,16 +67,24 @@ if [[ ! -z "${EMAIL}" ]]; then
 fi
 
 echo "==> Configuring optional work environment..."
-read -p "Work email (leave empty to skip) : " WORK_EMAIL
+# Load existing work config if available for defaults
+if [[ -f ~/.work.sh ]]; then
+    source ~/.work.sh
+fi
+
+read -p "Work email [${WORK_EMAIL}] (leave empty to skip) : " INPUT_WORK_EMAIL
+WORK_EMAIL=${INPUT_WORK_EMAIL:-$WORK_EMAIL}
 
 if [[ ! -z "${WORK_EMAIL}" ]]; then
-    read -p "Work 1Password account ID : " OP_ACCOUNT
+    read -p "Work 1Password account ID [${OP_ACCOUNT}] : " INPUT_OP_ACCOUNT
+    OP_ACCOUNT=${INPUT_OP_ACCOUNT:-$OP_ACCOUNT}
+
     echo "    Fetching work overrides and secrets..."
     # Work 1password account
-    eval $(op signin)
-    touch ~/.work.sh 
+    eval $(op signin --account "${OP_ACCOUNT}")
 
-    # Persist the account ID for future op signin calls (e.g. in aliases)
+    # Overwrite/Create the local cache with current values
+    echo "export WORK_EMAIL=\"${WORK_EMAIL}\"" > ~/.work.sh
     echo "export OP_ACCOUNT=\"${OP_ACCOUNT}\"" >> ~/.work.sh
 
     echo "    Linking work-specific Git config..."

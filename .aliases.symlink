@@ -65,7 +65,7 @@ update_secrets() {
 }
 
 update_work_secrets() {
-    op signin --account "${WORK_OP_ACCOUNT:-work}"
+    op signin --account "${OP_ACCOUNT:-work}"
     op inject -fi ~/.dotfiles/.secrets.work.sh -o ~/.secrets.work.sh && cat ~/.secrets.work.sh
 }
 
