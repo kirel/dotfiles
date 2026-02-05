@@ -84,8 +84,12 @@ if [[ ! -z "${WORK_EMAIL}" ]]; then
 fi
 
 echo "==> Finalizing SSH permissions..."
-chmod 600 ~/.ssh/*
-chmod 644 ~/.ssh/*.pub
+if ls ~/.ssh/* >/dev/null 2>&1; then
+    chmod 600 ~/.ssh/*
+fi
+if ls ~/.ssh/*.pub >/dev/null 2>&1; then
+    chmod 644 ~/.ssh/*.pub
+fi
 
 # ZSH Installation
 echo "==> Checking Zsh installation..."
