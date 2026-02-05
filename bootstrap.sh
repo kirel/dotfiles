@@ -100,7 +100,8 @@ if [[ "$IS_WORK" =~ ^[Yy]$ ]]; then
     echo "export OP_ACCOUNT=\"${OP_ACCOUNT}\"" > ~/.work.sh
     echo "[[ -f ~/.aliases.work ]] && source ~/.aliases.work" >> ~/.work.sh
     
-    ln -sf "$DOTFILES_DIR/.gitconfig.work" ~/.gitconfig.work
+    echo "    Injecting work git config..."
+    op inject -fi "$DOTFILES_DIR/.gitconfig.work.tmpl" -o ~/.gitconfig.work
 else
     echo "==> Configuring Personal Environment..."
     read -p "Personal email for Git: " PERSONAL_EMAIL

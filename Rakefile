@@ -4,8 +4,7 @@ OS_TYPE = `uname`.strip
 # Files/folders to skip on Linux
 LINUX_SKIP = [
   '.raycast',
-  '.config/crush',
-  '.gitconfig.work' # Usually only for my work mac
+  '.config/crush'
 ]
 
 task :symlink do

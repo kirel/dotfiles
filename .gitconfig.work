@@ -1,7 +1,0 @@
-[user]
-	name = Daniel Kirsch
-	email = work@example.com
-	signingkey = AD6287B6B9D06D61D4653B677D39E67DD496863D
-
-[commit]
-	gpgsign = true
