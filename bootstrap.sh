@@ -86,6 +86,7 @@ if [[ ! -z "${WORK_EMAIL}" ]]; then
     # Overwrite/Create the local cache with current values
     echo "export WORK_EMAIL=\"${WORK_EMAIL}\"" > ~/.work.sh
     echo "export OP_ACCOUNT=\"${OP_ACCOUNT}\"" >> ~/.work.sh
+    echo "[[ -f ~/.aliases_work ]] && source ~/.aliases_work" >> ~/.work.sh
 
     echo "    Linking work-specific Git config..."
     ln -sf "$PWD/.gitconfig.work" ~/.gitconfig.work
