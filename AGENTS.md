@@ -16,17 +16,24 @@ The primary way to set up the environment is by running the `bootstrap.sh` scrip
 
 1.  Install 1Password and its CLI tool.
 2.  Prompt for user information to configure Git and fetch secrets from 1Password.
-3.  Set up SSH keys.
-4.  Install Zsh and Oh My Zsh.
-5.  Clone this dotfiles repository to `~/.dotfiles`.
-6.  Run `rake` to create symlinks for all the configuration files.
-7.  Run `brew bundle` to install all the packages, casks, and VS Code extensions listed in the `Brewfile`.
+3.  Prompt for optional work information (email and 1Password account ID) to set up a work-specific environment.
+4.  Set up SSH keys.
+5.  Install Zsh and Oh My Zsh.
+6.  Clone this dotfiles repository to `~/.dotfiles`.
+7.  Run `rake` to create symlinks for all the configuration files.
+8.  Run `brew bundle` to install all the packages, casks, and VS Code extensions listed in the `Brewfile`.
+9.  Install personal Mac App Store apps via `Brewfile.mas` (automatically skipped if a work environment is detected).
 
 ## Commands
 
 *   **Initial Setup:**
     ```bash
     sh ./bootstrap.sh
+    ```
+
+*   **Install MAS Apps:** To manually install personal Mac App Store apps:
+    ```bash
+    brew bundle --file=Brewfile.mas
     ```
 
 *   **Update Brewfile:** To update the `Brewfile` with currently installed packages:
@@ -47,6 +54,6 @@ The primary way to set up the environment is by running the `bootstrap.sh` scrip
 # Development Conventions
 
 *   **Symlinking:** Configuration files in this repository have a `.symlink` extension. The `Rakefile` contains a task that creates symbolic links from this repository to the corresponding dotfile in the user's home directory (e.g., `.zshrc.symlink` -> `~/.zshrc`).
-*   **Package Management:** The `Brewfile` is the single source of truth for all Homebrew-managed software, including command-line tools, GUI applications (casks), Mac App Store apps (`mas`), and VS Code extensions (`vscode`).
-*   **Secrets:** Secrets are not stored in the repository. They are managed in 1Password and sourced into the shell environment by the `bootstrap.sh` script, creating files like `~/.secrets.sh`.
-*   **Modularity:** Shell configuration is broken down into multiple files. The main entry point is `.zshrc.symlink`, which sources other files like `.aliases.symlink` and the secret files.
+*   **Package Management:** The `Brewfile` is the primary source of truth for command-line tools, GUI applications (casks), and VS Code extensions (`vscode`). Mac App Store apps (`mas`) are managed separately in `Brewfile.mas` to allow skipping them in environments where the App Store is restricted.
+*   **Secrets:** Secrets are not stored in the repository. They are managed in 1Password and sourced into the shell environment by the `bootstrap.sh` script, creating files like `~/.secrets.sh` and `~/.work.sh`.
+*   **Modularity:** Shell configuration is broken down into multiple files. The main entry point is `.zshrc.symlink`, which sources other files like `.aliases.symlink`, secret files, and work-specific overrides.

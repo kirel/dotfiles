@@ -10,6 +10,10 @@ or
 
     brew bundle dump -f
 
+## Install MAS
+
+    brew bundle --file=Brewfile.mas
+
 ## Cleanup
 
     brew bundle cleanup
