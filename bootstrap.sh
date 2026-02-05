@@ -85,7 +85,12 @@ if command -v rake &> /dev/null; then rake; else
 fi
 
 # 4. Environment Specific Setup
-read -p "Is this a WORK machine? (y/N): " IS_WORK
+if [[ -f ~/.work.sh ]]; then
+    IS_WORK="y"
+    echo "==> Detected existing work configuration."
+else
+    read -p "Is this a WORK machine? (y/N): " IS_WORK
+fi
 
 if [[ "$IS_WORK" =~ ^[Yy]$ ]]; then
     echo "==> Configuring Work Environment..."
@@ -104,9 +109,14 @@ if [[ "$IS_WORK" =~ ^[Yy]$ ]]; then
     op inject -fi "$DOTFILES_DIR/.gitconfig.work.tmpl" -o ~/.gitconfig.work
 else
     echo "==> Configuring Personal Environment..."
-    read -p "Personal email for Git: " PERSONAL_EMAIL
-    if [[ ! -z "$PERSONAL_EMAIL" ]]; then
-        git config --global user.email "$PERSONAL_EMAIL"
+    EXISTING_EMAIL=$(git config --global user.email || true)
+    if [[ -z "$EXISTING_EMAIL" ]]; then
+        read -p "Personal email for Git: " PERSONAL_EMAIL
+        if [[ ! -z "$PERSONAL_EMAIL" ]]; then
+            git config --global user.email "$PERSONAL_EMAIL"
+        fi
+    else
+        echo "    Using existing Git email: $EXISTING_EMAIL"
     fi
     
     echo "    Injecting personal secrets..."
