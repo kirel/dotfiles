@@ -9,7 +9,16 @@ install_1password() {
         if ! command -v brew &> /dev/null; then
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         fi
-        brew install --cask 1password 1password-cli
+        
+        # Check if 1password-cli is needed
+        if ! command -v op &> /dev/null; then
+            brew install --cask 1password-cli
+        fi
+
+        # Check if 1password GUI is needed (skip if already in /Applications or installed via brew)
+        if [[ ! -d "/Applications/1Password.app" ]] && ! brew list --cask 1password &>/dev/null; then
+            brew install --cask 1password
+        fi
     elif [[ "$OS_TYPE" == "Linux" ]]; then
         # Check for Debian/Ubuntu
         if command -v apt-get &> /dev/null; then
