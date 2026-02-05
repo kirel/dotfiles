@@ -82,11 +82,12 @@ if [[ ! -z "${WORK_EMAIL}" ]]; then
     echo "    Fetching work overrides and secrets..."
     # Work 1password account
     eval $(op signin --account "${OP_ACCOUNT}")
+    op inject -i .secrets.work.sh -o ~/.secrets.work.sh
 
     # Overwrite/Create the local cache with current values
     echo "export WORK_EMAIL=\"${WORK_EMAIL}\"" > ~/.work.sh
     echo "export OP_ACCOUNT=\"${OP_ACCOUNT}\"" >> ~/.work.sh
-    echo "[[ -f ~/.aliases_work ]] && source ~/.aliases_work" >> ~/.work.sh
+    echo "[[ -f ~/.aliases.work ]] && source ~/.aliases.work" >> ~/.work.sh
 
     echo "    Linking work-specific Git config..."
     ln -sf "$PWD/.gitconfig.work" ~/.gitconfig.work
