@@ -70,14 +70,14 @@ echo "==> Configuring optional work environment..."
 read -p "Work email (leave empty to skip) : " WORK_EMAIL
 
 if [[ ! -z "${WORK_EMAIL}" ]]; then
-    read -p "Work 1Password account ID : " WORK_OP_ACCOUNT
+    read -p "Work 1Password account ID : " OP_ACCOUNT
     echo "    Fetching work overrides and secrets..."
     # Work 1password account
-    eval $(op signin --account "${WORK_OP_ACCOUNT}")
-    op document get .work.sh > ~/.work.sh 
+    eval $(op signin)
+    touch ~/.work.sh 
 
     # Persist the account ID for future op signin calls (e.g. in aliases)
-    echo "export WORK_OP_ACCOUNT=\"${WORK_OP_ACCOUNT}\"" >> ~/.work.sh
+    echo "export OP_ACCOUNT=\"${OP_ACCOUNT}\"" >> ~/.work.sh
 
     echo "    Linking work-specific Git config..."
     ln -sf "$PWD/.gitconfig.work" ~/.gitconfig.work
