@@ -1,0 +1,5 @@
+cask "slack"
+cask "zoom"
+cask "skype"
+cask "notion"
+cask "docker"

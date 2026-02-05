@@ -33,18 +33,26 @@ end
 task :dump do
   puts "Dumping Brewfiles..."
   tmp = "Brewfile.tmp"
-  # Use sh to execute the shell command
   sh "brew bundle dump --force --file=#{tmp}"
   
-  # Extract MAS entries and the mas CLI to Brewfile.mas
-  # We use grep to filter lines. '^mas ' matches MAS apps, '^brew "mas"' matches the mas tool itself.
-  sh "grep -E '^mas |^brew \"mas\"' #{tmp} > Brewfile.mas"
+  # Extract MAS entries to Brewfile.personal (since they are 'play' stuff now)
+  sh "grep -E '^mas ' #{tmp} > Brewfile.personal.new || touch Brewfile.personal.new"
+  # Append existing personal casks if they were in the dump (they will be)
+  # This is tricky because we don't know which casks are personal vs base vs work automatically.
+  # For now, let's just keep the split logic simple: 
+  # 1. Everything that is currently in Brewfile.personal stays there.
+  # 2. Everything that is currently in Brewfile.work stays there.
+  # 3. New stuff goes to main Brewfile.
   
-  # Put everything else into the main Brewfile
-  sh "grep -vE '^mas |^brew \"mas\"' #{tmp} > Brewfile"
+  puts "Manual cleanup may be required to move new casks between Brewfile, Brewfile.personal, and Brewfile.work."
+  sh "grep -vE '^mas ' #{tmp} > Brewfile"
   
-  rm tmp
-  puts "Done! Split into Brewfile and Brewfile.mas"
+  # Append MAS to personal
+  sh "cat Brewfile.personal.new >> Brewfile.personal"
+  sh "sort -u Brewfile.personal -o Brewfile.personal"
+  
+  rm tmp Brewfile.personal.new
+  puts "Done! MAS apps moved to Brewfile.personal. Casks/Brews are in Brewfile."
 end
 
 task :default => :symlink
