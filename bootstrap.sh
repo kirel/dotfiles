@@ -109,15 +109,8 @@ if [[ "$IS_WORK" =~ ^[Yy]$ ]]; then
     op inject -fi "$DOTFILES_DIR/.gitconfig.work.tmpl" -o ~/.gitconfig.work
 else
     echo "==> Configuring Personal Environment..."
-    EXISTING_EMAIL=$(git config --global user.email || true)
-    if [[ -z "$EXISTING_EMAIL" ]]; then
-        read -p "Personal email for Git: " PERSONAL_EMAIL
-        if [[ ! -z "$PERSONAL_EMAIL" ]]; then
-            git config --global user.email "$PERSONAL_EMAIL"
-        fi
-    else
-        echo "    Using existing Git email: $EXISTING_EMAIL"
-    fi
+    echo "    Injecting personal git config..."
+    op inject -fi "$DOTFILES_DIR/.gitconfig.personal.tmpl" -o ~/.gitconfig.personal
     
     echo "    Injecting personal secrets..."
     op inject -fi "$DOTFILES_DIR/.secrets.sh" -o ~/.secrets.sh && cat ~/.secrets.sh
