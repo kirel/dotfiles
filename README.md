@@ -21,7 +21,7 @@ or
 
 ## Ansible
 
-    pipx run --spec ansible -- ansible-playbook -K ansible/enable_touchid_sudo.yaml
+    uv ansible-playbook -K ansible/enable_touchid_sudo.yaml
 
 ## Update secrets
 
