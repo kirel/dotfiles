@@ -1,6 +1,5 @@
 [user]
 	name = Daniel Kirsch
-	email = danishkirel@gmail.com
 
 [core]
 	editor = code -w
@@ -29,4 +28,5 @@
     file-decoration-style = none
 
 [include]
+   path = ~/.gitconfig.personal
    path = ~/.gitconfig.work
