@@ -21,7 +21,7 @@ or
 
 ## Ansible
 
-    uv ansible-playbook -K ansible/enable_touchid_sudo.yaml
+    uvx --from ansible-core ansible-playbook -K ansible/enable_touchid_sudo.yaml
 
 ## Update secrets
 
