@@ -69,6 +69,8 @@ update_work_secrets() {
     op inject -fi ~/.dotfiles/.secrets.work.sh -o ~/.secrets.work.sh && cat ~/.secrets.work.sh
 }
 
+alias maxvram='sudo sysctl -w iogpu.wired_limit_mb=$(( ($(sysctl -n hw.memsize) / 1024 / 1024) - 8192 ))'
+
 # Aider Aliases
 alias aider='uv tool run --from aider-chat --python python3.12 aider --chat-language en --watch-files'
 alias aider-sonnet='aider --model openrouter/anthropic/claude-3.7-sonnet:beta'
@@ -90,8 +92,6 @@ get_model_size() {
     size=$(echo "$model_name" | grep -o '[0-9]\+\.*[0-9]*[bB]' | head -n1 | grep -o '[0-9]\+\.*[0-9]*' || echo "0")
     echo "$size"
 }
-
-
 
 aider-ollama() {
     local model
@@ -194,6 +194,42 @@ claudeor() {
     export ANTHROPIC_AUTH_TOKEN="$LITELLM_API_KEY"
 
     echo "Model set to openrouter/$MODEL"
+
+    # Optional: if you want to run claude with params given to function
+    claude "$@"
+}
+
+lmclaude() {
+    # Select model with fzf from LM Studio
+    local MODEL
+    MODEL=$(curl -s "http://localhost:1234/v1/models" | \
+        jq -r '.data[].id' | \
+        while read -r name; do
+            size=$(get_model_size "$name")
+            printf "%f %s\n" "$size" "$name"
+        done | sort -nr | cut -d' ' -f2- | \
+        fzf --height 40% --reverse --prompt="Select LM Studio model> ")
+
+    if [[ -z "$MODEL" ]]; then
+        echo "No model selected."
+        return 1
+    fi
+
+    # Export your required static environment variables
+    export API_TIMEOUT_MS="3000000"
+    export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
+
+    # Export all model-related variables set to the selected model
+    export ANTHROPIC_MODEL="$MODEL"
+    export ANTHROPIC_SMALL_FAST_MODEL="$MODEL"
+    export ANTHROPIC_DEFAULT_SONNET_MODEL="$MODEL"
+    export ANTHROPIC_DEFAULT_OPUS_MODEL="$MODEL"
+    export ANTHROPIC_DEFAULT_HAIKU_MODEL="$MODEL"
+
+    export ANTHROPIC_BASE_URL="http://localhost:1234"
+    export ANTHROPIC_AUTH_TOKEN="lmstudio"
+
+    echo "Model set to $MODEL (LM Studio)"
 
     # Optional: if you want to run claude with params given to function
     claude "$@"
