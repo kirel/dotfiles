@@ -105,6 +105,11 @@ if command -v starship &> /dev/null; then
   eval "$(starship init zsh)"
 fi
 
+# mise
+if command -v mise &> /dev/null; then
+  eval "$(mise activate zsh)"
+fi
+
 # More imports
 [[ -a ~/.aliases ]] && source ~/.aliases
 [[ -a ~/.secrets.sh ]] && source ~/.secrets.sh
