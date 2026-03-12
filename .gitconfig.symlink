@@ -1,5 +1,6 @@
 [user]
 	name = Daniel Kirsch
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL0uAFmZ32oLH2p+hY5dLA3AzLRzuOGj53bZgwrvp6Cz
 
 [core]
 	editor = code -w
@@ -30,3 +31,9 @@
 [include]
    path = ~/.gitconfig.personal
    path = ~/.gitconfig.work
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true

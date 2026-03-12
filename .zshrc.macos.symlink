@@ -39,8 +39,12 @@ fi
 # iTerm2 integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# 1Password SSH Agent
-export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BU86482C3.com.1password/t/agent.sock
+# 1Password SSH Agent — auto-detect version (8+ uses 2BUA8C4S2C, 7 uses 2BU86482C3)
+if [[ -S ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ]]; then
+  export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+elif [[ -S ~/Library/Group\ Containers/2BU86482C3.com.1password/t/agent.sock ]]; then
+  export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BU86482C3.com.1password/t/agent.sock
+fi
 
 # Sourcing macOS aliases if they exist
 [[ -f ~/.aliases.macos ]] && source ~/.aliases.macos
