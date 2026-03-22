@@ -1,6 +1,5 @@
 [user]
 	name = Daniel Kirsch
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL0uAFmZ32oLH2p+hY5dLA3AzLRzuOGj53bZgwrvp6Cz
 
 [core]
 	editor = code -w
