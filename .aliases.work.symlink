@@ -1,2 +1,5 @@
 # Work-specific aliases
 # This file is symlinked to ~/.aliases.work and sourced via ~/.work.sh
+
+# pi - Obsidian Vault persistent session
+alias pi-vault='pi --session "/Users/daniel.kirsch/.pi/agent/sessions/--Users-daniel.kirsch-Documents-Obsidian Vault--/2026-04-07T12-32-14-825Z_7e97d191-d6b4-4770-b4ff-4aa67cffe1cc.jsonl"'
