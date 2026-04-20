@@ -69,12 +69,12 @@ ha_notify() {
 
 update_secrets() {
     op signin --account my
-    op inject -fi ~/.dotfiles/.secrets.sh -o ~/.secrets.sh && cat ~/.secrets.sh
+    op inject --account my -fi ~/.dotfiles/.secrets.sh -o ~/.secrets.sh && cat ~/.secrets.sh
 }
 
 update_work_secrets() {
     op signin --account "${OP_ACCOUNT:-work}"
-    op inject -fi ~/.dotfiles/.secrets.work.sh -o ~/.secrets.work.sh && cat ~/.secrets.work.sh
+    op inject --account "${OP_ACCOUNT:-work}" -fi ~/.dotfiles/.secrets.work.sh -o ~/.secrets.work.sh && cat ~/.secrets.work.sh
 }
 
 alias maxvram='sudo sysctl -w iogpu.wired_limit_mb=$(( ($(sysctl -n hw.memsize) / 1024 / 1024) - 8192 ))'
