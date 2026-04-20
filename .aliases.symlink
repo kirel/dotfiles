@@ -51,6 +51,13 @@ function op2env() {
 alias tmosh='() {mosh $* -- sh -c "tmux a || tmux"}'
 alias zmosh='() {mosh $* -- sh -c "zellij a -c default"}'
 
+seshc() {
+    local session
+    session=$(sesh list | fzf --height 40% --reverse --prompt="Select session> ")
+    [[ -z "$session" ]] && return 0
+    sesh connect -c "tmux rename-window terminal \\; new-window -d -n pi 'pi'" "$session"
+}
+
 ha_notify() {
   curl -X POST \
     -H "Authorization: Bearer $HASS_TOKEN" \

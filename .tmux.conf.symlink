@@ -1,0 +1,52 @@
+# Sensible defaults
+set -g default-terminal "screen-256color"
+set -as terminal-features ",xterm-256color:RGB"
+set -g history-limit 50000
+set -g mouse on
+set -g focus-events on
+set -g set-clipboard on
+set -sg escape-time 0
+
+# Use vi-style keys where tmux supports them.
+setw -g mode-keys vi
+set -g status-keys vi
+
+# Keep numbering intuitive.
+set -g base-index 1
+setw -g pane-base-index 1
+set -g renumber-windows on
+
+# Window behavior
+set -g detach-on-destroy off
+set -g allow-rename off
+set -g automatic-rename off
+
+# Easier pane management.
+bind x kill-pane
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+# Reload config quickly.
+bind r source-file ~/.tmux.conf \; display-message "tmux config reloaded"
+bind-key T run-shell "sesh connect -c \"tmux rename-window terminal \\; new-window -d -n pi 'pi'\" \"$(sesh list --icons | fzf-tmux -p 80%,70% --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' --bind 'tab:down,btab:up' --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' --preview-window 'right:55%' --preview 'sesh preview {}')\""
+bind-key W run-shell "sesh window \"$(sesh window | fzf-tmux -p 60%,50% --prompt '🪟  ')\""
+
+# More ergonomic copy mode with vi bindings.
+bind -T copy-mode-vi v send-keys -X begin-selection
+bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+
+# A more intentional top tab bar.
+set -g status-position top
+set -g status-justify left
+set -g status-style "fg=#a8b2c1,bg=#0f172a"
+set -g status-left-length 40
+set -g status-right-length 80
+set -g status-left "#[fg=#0f172a,bg=#7dd3fc,bold] #S #[fg=#7dd3fc,bg=#0f172a,nobold] "
+set -g status-right "#[fg=#94a3b8,bg=#0f172a]#{?client_prefix,#[fg=#f59e0b]PREFIX ,}#[fg=#64748b]%Y-%m-%d #[fg=#e2e8f0]%H:%M "
+setw -g window-status-separator ""
+setw -g window-status-format "#[fg=#94a3b8,bg=#1e293b]  #I:#W  #[fg=#0f172a,bg=#0f172a] "
+setw -g window-status-current-format "#[fg=#0f172a,bg=#f8fafc,bold]  #I:#W  #[fg=#f8fafc,bg=#0f172a,nobold] "

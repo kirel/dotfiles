@@ -73,6 +73,11 @@ if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh)"
 fi
 
+# tv
+if command -v tv &> /dev/null; then
+  eval "$(tv init zsh)"
+fi
+
 # thefuck
 if command -v thefuck &> /dev/null; then
   eval $(thefuck --alias)
@@ -124,3 +129,23 @@ export SDKMAN_DIR="$HOME/.sdkman"
 export OCO_AI_PROVIDER="gemini"
 export OCO_MODEL="gemini-2.5-flash"
 export OCO_API_KEY=$GEMINI_API_KEY
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/daniel/.cache/lm-studio/bin"
+# End of LM Studio CLI section
+
+sesh-sessions() {
+  {
+    exec </dev/tty
+    exec <&1
+    local session
+    session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
+    zle reset-prompt > /dev/null 2>&1 || true
+    [[ -z "$session" ]] && return
+    sesh connect "$session"
+  }
+}
+
+zle -N sesh-sessions
+bindkey -M emacs '\es' sesh-sessions
+bindkey -M vicmd '\es' sesh-sessions
+bindkey -M viins '\es' sesh-sessions
