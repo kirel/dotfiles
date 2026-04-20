@@ -9,19 +9,24 @@ LINUX_SKIP = [
 
 task :symlink do
   ext = '.symlink'
-  Dir.glob("**/*#{ext}", File::FNM_DOTMATCH) do |path|
+
+  Dir.glob("**/*#{ext}", File::FNM_DOTMATCH).sort.each do |path|
+    # Skip if it's the current directory or parent
+    next if path == "." || path == ".."
+
+    # If a parent directory is already a *.symlink package, everything below it
+    # is regular repo content and must not be symlinked again.
+    parent_parts = File.dirname(path).split(File::SEPARATOR)
+    next if parent_parts.any? { |part| part.end_with?(ext) }
+
     # Skip certain files on Linux
     if OS_TYPE == 'Linux'
-      base_name = File.basename(path, ext)
       next if LINUX_SKIP.any? { |skip| path.include?(skip) }
     end
 
     dotfile = "#{Dir.pwd}/#{path}"
-    symlink = File.expand_path("#{home_dir}/#{(File.dirname path)}/#{File.basename(path, ext)}")
-    
-    # skip if it's the current directory or parent
-    next if path == "." || path == ".."
-    
+    symlink = File.expand_path("#{home_dir}/#{File.dirname(path)}/#{File.basename(path, ext)}")
+
     # delete symlink if exists
     FileUtils.rm_rf symlink
     FileUtils.mkdir_p File.dirname(symlink)
