@@ -78,6 +78,11 @@ if command -v tv &> /dev/null; then
   eval "$(tv init zsh)"
 fi
 
+# worktrunk
+if command -v wt &> /dev/null; then
+  eval "$(command wt config shell init zsh)"
+fi
+
 # thefuck
 if command -v thefuck &> /dev/null; then
   eval $(thefuck --alias)
