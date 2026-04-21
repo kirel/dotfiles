@@ -30,6 +30,10 @@ export KREW_BIN="${KREW_ROOT:-$HOME/.krew}/bin"
 
 export PATH=$STACK_BIN:$CABAL_BIN:$COMPOSER_BIN:$KREW_BIN:$PATH
 
+# Pi / tmux / Ghostty
+# Enable Kitty-protocol inline images in pi when running inside tmux.
+export PI_TMUX_IMAGES=1
+
 # Language version managers
 
 # rbenv
