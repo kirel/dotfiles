@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+set -u
+
+REAL_GWS="/opt/homebrew/bin/gws"
+SERVICES="gmail,calendar,drive,sheets,docs"
+
+is_auth_failure() {
+  local code="$1" out_file="$2" err_file="$3"
+
+  [[ "$code" -eq 2 ]] && return 0
+  grep -Eiq 'ACCESS_TOKEN_SCOPE_INSUFFICIENT|insufficient authentication scopes|insufficientPermissions|Insufficient Permission|invalid_rapt|reauth' \
+    "$out_file" "$err_file" 2>/dev/null
+}
+
+login() {
+  local log_file pid tail_pid url opened=0 rc
+  log_file="$(mktemp)"
+
+  echo "gws auth expired/invalid; running: gws auth login -s $SERVICES" >&2
+
+  "$REAL_GWS" auth login -s "$SERVICES" >"$log_file" 2>&1 &
+  pid=$!
+
+  tail -n +1 -f "$log_file" >&2 2>/dev/null &
+  tail_pid=$!
+
+  while kill -0 "$pid" 2>/dev/null; do
+    if [[ "$opened" -eq 0 ]]; then
+      url="$(grep -Eo 'https://[^[:space:]]+' "$log_file" | head -n 1 || true)"
+      if [[ -n "${url:-}" ]]; then
+        opened=1
+        open "$url" >/dev/null 2>&1 || true
+      fi
+    fi
+    sleep 0.2
+  done
+
+  wait "$pid"
+  rc=$?
+  kill "$tail_pid" 2>/dev/null || true
+  wait "$tail_pid" 2>/dev/null || true
+  rm -f "$log_file"
+  return "$rc"
+}
+
+case "${1:-}" in
+  auth|schema|--help|-h|help)
+    exec "$REAL_GWS" "$@"
+    ;;
+esac
+
+out_file="$(mktemp)"
+err_file="$(mktemp)"
+trap 'rm -f "$out_file" "$err_file"' EXIT
+
+"$REAL_GWS" "$@" >"$out_file" 2>"$err_file"
+code=$?
+
+if is_auth_failure "$code" "$out_file" "$err_file"; then
+  cat "$err_file" >&2
+  if login; then
+    exec "$REAL_GWS" "$@"
+  fi
+  echo "gws auth login failed" >&2
+  exit 2
+fi
+
+cat "$out_file"
+cat "$err_file" >&2
+exit "$code"
