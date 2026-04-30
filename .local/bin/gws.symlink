@@ -2,7 +2,10 @@
 set -u
 
 REAL_GWS="/opt/homebrew/bin/gws"
-SERVICES="gmail,calendar,drive,sheets,docs"
+# Include exact read-only scopes as well as write-capable scopes. Some gws helper
+# commands (+agenda, +triage) request tokens for calendar.readonly/gmail.readonly
+# specifically; having only calendar/gmail.modify is not sufficient for them.
+SCOPES="https://www.googleapis.com/auth/gmail.readonly,https://www.googleapis.com/auth/gmail.modify,https://www.googleapis.com/auth/calendar.readonly,https://www.googleapis.com/auth/calendar,https://www.googleapis.com/auth/drive,https://www.googleapis.com/auth/spreadsheets,https://www.googleapis.com/auth/documents,openid,https://www.googleapis.com/auth/userinfo.email,https://www.googleapis.com/auth/userinfo.profile"
 
 is_auth_failure() {
   local code="$1" out_file="$2" err_file="$3"
@@ -16,9 +19,9 @@ login() {
   local log_file pid tail_pid url opened=0 rc
   log_file="$(mktemp)"
 
-  echo "gws auth expired/invalid; running: gws auth login -s $SERVICES" >&2
+  echo "gws auth expired/invalid; running: gws auth login with explicit scopes" >&2
 
-  "$REAL_GWS" auth login -s "$SERVICES" >"$log_file" 2>&1 &
+  "$REAL_GWS" auth login --scopes "$SCOPES" >"$log_file" 2>&1 &
   pid=$!
 
   tail -n +1 -f "$log_file" >&2 2>/dev/null &
