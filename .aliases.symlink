@@ -50,6 +50,7 @@ function op2env() {
 }
 
 alias tmosh='() {mosh $* -- sh -c "tmux a || tmux"}'
+alias mt='() { mosh "$@" -- tmux new-session -A -s default; }'
 alias zmosh='() {mosh $* -- sh -c "zellij a -c default"}'
 
 seshc() {
