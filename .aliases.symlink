@@ -35,7 +35,7 @@ alias lc="lumen draft | git commit -F -"
 
 # Homebrew
 if command -v brew &> /dev/null; then
-    alias brewup="brew update && brew upgrade && brew cleanup && brew autoremove && brew cu && mise upgrade"
+    alias brewup="brew update && HOMEBREW_NO_ASK=1 brew upgrade --yes && brew cleanup && brew autoremove && brew cu --yes --no-brew-update && mise upgrade --yes"
 fi
 
 # AI / Ollama tools

@@ -127,6 +127,7 @@ fi
 # More imports
 [[ -a ~/.aliases ]] && source ~/.aliases
 [[ -a ~/.secrets.sh ]] && source ~/.secrets.sh
+[[ -a ~/.secrets.local.sh ]] && source ~/.secrets.local.sh
 [[ -a ~/.work.sh ]] && source ~/.work.sh # source again if needed
 [[ -a ~/.secrets.work.sh ]] && source ~/.secrets.work.sh
 
@@ -158,3 +159,7 @@ zle -N sesh-sessions
 bindkey -M emacs '\es' sesh-sessions
 bindkey -M vicmd '\es' sesh-sessions
 bindkey -M viins '\es' sesh-sessions
+
+
+# Added by Antigravity
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"

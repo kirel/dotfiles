@@ -2,3 +2,5 @@ vim.symlink/bundle/
 .DS_Store
 .aider*
 .gitconfig.work
+.secrets.local.sh
+.config/crush.symlink/skills/
